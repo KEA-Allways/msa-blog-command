@@ -1,4 +1,4 @@
-package com.allways.domain.category.domain;
+package com.allways.domain.category.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,13 +15,16 @@ import com.allways.domain.theme.domain.Theme;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Category extends EntityDate  {
 
-	@Id@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long categorySeq;
 
 	@Column
@@ -30,9 +33,15 @@ public class Category extends EntityDate  {
 	@Column
 	private Long categoryOrder;
 
+	//나중에 생각해보기
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "theme_seq")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Theme theme;
+	//
+	public Category(String name,Category Theme){
+
+	}
 
 
 }
