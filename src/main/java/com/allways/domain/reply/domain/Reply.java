@@ -36,5 +36,15 @@ public class Reply extends EntityDate  {
 	// @JoinColumn(name = "user_seq", nullable = false)
 	// private User user;
 
+	@Column
+	private Long userSeq;
 
+
+	public Reply(String content, Post post, Long UserSeq) {
+		this.replyContent = content;
+		//this.member = member;
+		this.post = post;
+		this.userSeq = UserSeq;
+		//this.deleted = false;
+	}
 }

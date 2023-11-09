@@ -26,7 +26,7 @@ public class Post extends EntityDate  {
 	private Long postSeq;
 
 	@Column(nullable = false)
-	private String postName;
+	private String postTitle;
 
 	@Column(nullable = false)
 	@Lob
@@ -34,6 +34,9 @@ public class Post extends EntityDate  {
 
 	@Column
 	private String postView;
+
+	@Column
+	private Long userSeq;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_seq", nullable = false)
