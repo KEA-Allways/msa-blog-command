@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.allways.common.EntityDate;
-import com.allways.domain.post.domain.Post;
+import com.allways.domain.post.entity.Post;
 
 import lombok.AccessLevel;
 import lombok.Getter;
