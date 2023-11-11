@@ -11,7 +11,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 import com.allways.common.EntityDate;
-import com.allways.domain.category.domain.Category;
+import com.allways.domain.category.entity.Category;
 
 import lombok.AccessLevel;
 import lombok.Getter;
