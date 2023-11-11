@@ -9,6 +9,7 @@ import javax.persistence.Lob;
 
 import com.allways.common.EntityDate;
 
+import com.allways.domain.template.dto.TemplateUpdateRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,8 +30,17 @@ public class Template extends EntityDate {
 	@Lob
 	private String templateContent;
 
-	// @ManyToOne(fetch = FetchType.LAZY)
-	// @JoinColumn(name = "theme_seq")
-	// private User user;
+	@Column(nullable = false)
+	private Long userSeq;
 
+	public Template(String templateName, String templateContent, Long userSeq) {
+		this.templateName = templateName;
+		this.templateContent = templateContent;
+		this.userSeq = userSeq;
+	}
+
+	public void update(TemplateUpdateRequest req) {
+		this.templateName = req.getTemplateName();
+		this.templateContent = req.getTemplateContent();
+	}
 }
