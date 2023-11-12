@@ -14,19 +14,19 @@ import javax.validation.Valid;
 public class ReplyCommandController {
     private final ReplyCommandService replyCommandService;
 
-    @GetMapping("/api/posts/{postId}/replies/{replyId}")
-    public Response readAll() {
-        return Response.success(null);
+    @PostMapping("/api/posts/{postSeq}/replies")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Response create(@PathVariable Long postSeq, @Valid @RequestBody ReplyCreateRequest req) {
+        //path로 받은 postSeq를 req에 세팅
+        req.setPostSeq(postSeq);
+        replyCommandService.create(req);
+        return Response.success();
     }
 
-    @PostMapping("/api/posts/1/replies")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Response create(@Valid @RequestBody ReplyCreateRequest req) {
-        System.out.println("!!!!!!!!");
-        System.out.println(req.getReplyContent());
-        System.out.println(req.getPostSeq());
-        System.out.println(req.getUserSeq());
-        replyCommandService.create(req);
+    @DeleteMapping("/api/posts/{postSeq}/replies/{replySeq}")
+    @ResponseStatus(HttpStatus.OK)
+    public Response delete(@PathVariable Long replySeq) {
+        replyCommandService.delete(replySeq);
         return Response.success();
     }
 }
