@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PostDto {
     private Long postSeq;
-    private String postName;
+    private String postTitle;
     private String postContent;
 //    private Long postView;
 //    member 받아오기
@@ -28,7 +28,7 @@ public class PostDto {
     public static PostDto toDto(Post post){
         return new PostDto(
                 post.getPostSeq(),
-                post.getPostName(),
+                post.getPostTitle(),
                 post.getPostContent(),
                 post.getCreatedAt(),
                 post.getModifiedAt()
