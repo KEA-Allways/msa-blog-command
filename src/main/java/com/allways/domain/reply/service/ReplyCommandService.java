@@ -1,8 +1,8 @@
 package com.allways.domain.reply.service;
 
-import com.allways.domain.post.domain.Post;
+import com.allways.domain.post.entity.Post;
 import com.allways.domain.post.repository.PostRepository;
-import com.allways.domain.reply.ReplyRepository;
+import com.allways.domain.reply.repository.ReplyRepository;
 import com.allways.domain.reply.domain.Reply;
 import com.allways.domain.reply.dto.ReplyCreateRequest;
 import lombok.RequiredArgsConstructor;
