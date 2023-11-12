@@ -24,7 +24,7 @@ public class Post extends EntityDate  {
 	private Long postSeq;
 
 	@Column(nullable = false)
-	private String postName;
+	private String postTitle;
 
 	@Column(nullable = false)
 	@Lob
@@ -49,9 +49,9 @@ public class Post extends EntityDate  {
 		@OneToMany(mappedBy = "post",cascade = CascadeType.PERSIST,orphanRemoval = true)
 		private List<Image> images; //3
 
-	public Post(String postName,String postContent
+	public Post(String postTitle,String postContent
 			, Category category,List<Image> images){
-		this.postName=postName;
+		this.postTitle=postTitle;
 		this.postContent=postContent;
 //		this.postView =postView;
 		this.category=category;
