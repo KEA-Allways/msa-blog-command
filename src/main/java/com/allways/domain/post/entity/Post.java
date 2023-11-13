@@ -9,6 +9,7 @@ import com.allways.common.feign.user.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,9 @@ public class Post extends EntityDate  {
 	@Lob
 	private String postContent;
 
+	@Column
+	private Long postView;
+
 //	//조회수
 //	@Column
 //	private Long postView;
@@ -38,25 +42,24 @@ public class Post extends EntityDate  {
 	// @OnDelete(action = OnDeleteAction.CASCADE)
 	private Category category;
 
-	//post 와 유저간의 관계
-	// @ManyToOne(fetch = FetchType.LAZY)
-	// @JoinColumn(name = "user_seq", nullable = false)
-	// // @OnDelete(action = OnDeleteAction.CASCADE)
-	// private User user;
 
-	@Transient //데이터베이스에 저장하지 않도록 설정
-	private UserDto user;
+//	 @ManyToOne(fetch = FetchType.LAZY)
+	 @Column(name = "user_seq", nullable = false)
+	 // @OnDelete(action = OnDeleteAction.CASCADE)
+	 private Long userSeq;
+
+
 
 	//post 와 image 간의 관계
 	@OneToMany(mappedBy = "post",cascade = CascadeType.PERSIST,orphanRemoval = true)
 	private List<Image> images; //3
 
-	public Post(String postTitle, String postContent, UserDto user
+	public Post(String postTitle, String postContent, Long userSeq
 			, Category category, List<Image> images){
 		this.postTitle=postTitle;
 		this.postContent=postContent;
-		this.user=user;
-//		this.postView =postView;
+		this.userSeq=userSeq;
+
 		this.category=category;
 		this.images=new ArrayList<>();
 	}

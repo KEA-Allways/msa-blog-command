@@ -40,14 +40,18 @@ public class PostCreateRequest {
 
     private List<MultipartFile> images = new ArrayList<>();
 
+    private Long postView;
+
     //memberRepository 같은 경우 api 호출
     public static Post toEntity(PostCreateRequest req, CategoryRepository categoryRepository){
         //feignClinet 값 넣기
-        UserDto user = userFeignClientService.getUserById(3L);
+//        UserDto user = userFeignClientService.getUserById(3L);
+        //JWT 로 유저 넣기
+
         return new Post(
                 req.title,
                 req.content,
-                user,
+                3L,
                 //카테고리 받아오기
                 categoryRepository.findById(req.getCategoryId()).orElseThrow(CategoryNotFoundException::new),
                 req.images.stream().map(i->new Image(i.getOriginalFilename())).collect(toList())
