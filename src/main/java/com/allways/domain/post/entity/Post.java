@@ -4,10 +4,8 @@ import javax.persistence.*;
 
 import com.allways.common.EntityDate;
 import com.allways.domain.category.entity.Category;
-import com.allways.domain.post.dto.UserDto;
-import com.allways.domain.post.entity.Image;
+import com.allways.common.feign.user.UserDto;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -62,5 +60,4 @@ public class Post extends EntityDate  {
 		this.category=category;
 		this.images=new ArrayList<>();
 	}
-
 }

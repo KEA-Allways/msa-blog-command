@@ -1,4 +1,4 @@
-package com.allways.domain.post.entity;
+package com.allways.common.feign.user;
 
 import com.allways.common.EntityDate;
 import lombok.AccessLevel;

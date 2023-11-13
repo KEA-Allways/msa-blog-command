@@ -1,8 +1,10 @@
-package com.allways.domain.template.service;
+package com.allways.common.feign.user;
 
-import com.allways.domain.post.dto.UserDto;
-import com.allways.domain.post.feign.UserFeignClient;
+import com.allways.common.feign.user.UserDto;
+import com.allways.common.feign.user.UserFeignClient;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserFeignClientService {
     private final UserFeignClient userFeignClient;
 

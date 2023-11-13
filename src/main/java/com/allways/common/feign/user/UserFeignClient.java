@@ -1,8 +1,6 @@
-package com.allways.domain.post.feign;
+package com.allways.common.feign.user;
 
-import com.allways.common.response.Response;
-import com.allways.domain.post.dto.UserDto;
-import com.allways.domain.post.entity.User;
+import com.allways.common.feign.user.UserDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 //해당 interface 에서 값 불러오기
 @FeignClient(name = "msa-user-command", url ="http://api/users" )
 public interface UserFeignClient {
-    @GetMapping("/{id}")
-    UserDto getUserById(@PathVariable Long id);
+    @GetMapping("/{seq}")
+    UserDto getUserById(@PathVariable Long seq);
 }

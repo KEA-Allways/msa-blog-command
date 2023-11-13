@@ -4,12 +4,11 @@ import javax.persistence.*;
 
 import com.allways.common.EntityDate;
 
+import com.allways.common.feign.user.User;
 import com.allways.domain.template.dto.TemplateUpdateRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 @Getter
 @Entity
@@ -28,8 +27,7 @@ public class Template extends EntityDate {
 	private String templateContent;
 
 	@ManyToOne // 다대일 관계 설정
-	@JoinColumn(name = "user_seq", nullable = false) // User 엔터티의 기본 키와 연결될 외래 키
-	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JoinColumn(name = "user_seq") // User 엔터티의 기본 키와 연결될 외래 키
 	private User user;
 
 	public Template(String templateTitle, String templateContent, User user) {
