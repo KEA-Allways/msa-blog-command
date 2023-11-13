@@ -18,7 +18,9 @@ public class TemplateCommandController {
     // 템플릿(서식) 생성하기(create)
     @PostMapping("/api/templates/new-template")
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@ModelAttribute TemplateCreateRequest req) {
+    public void create(@RequestBody TemplateCreateRequest req) {
+        //
+
         Response.success(templateCommandService.create(req));
     }
 

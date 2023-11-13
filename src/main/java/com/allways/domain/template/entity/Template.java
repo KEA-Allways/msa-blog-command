@@ -1,14 +1,10 @@
-package com.allways.domain.template.domain;
+package com.allways.domain.template.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.*;
 
 import com.allways.common.EntityDate;
 
+import com.allways.common.feign.user.User;
 import com.allways.domain.template.dto.TemplateUpdateRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -24,23 +20,23 @@ public class Template extends EntityDate {
 	private Long templateSeq;
 
 	@Column
-	private String templateName;
+	private String templateTitle;
 
 	@Column
 	@Lob
 	private String templateContent;
 
-	@Column(nullable = false)
+	@Column(name = "user_seq") // User 엔터티의 기본 키와 연결될 외래 키
 	private Long userSeq;
 
-	public Template(String templateName, String templateContent, Long userSeq) {
-		this.templateName = templateName;
+	public Template(String templateTitle, String templateContent, Long userSeq) {
+		this.templateTitle = templateTitle;
 		this.templateContent = templateContent;
 		this.userSeq = userSeq;
 	}
 
 	public void update(TemplateUpdateRequest req) {
-		this.templateName = req.getTemplateName();
+		this.templateTitle = req.getTemplateTitle();
 		this.templateContent = req.getTemplateContent();
 	}
 }
