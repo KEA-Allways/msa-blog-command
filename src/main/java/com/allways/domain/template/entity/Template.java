@@ -26,14 +26,13 @@ public class Template extends EntityDate {
 	@Lob
 	private String templateContent;
 
-	@ManyToOne // 다대일 관계 설정
-	@JoinColumn(name = "user_seq") // User 엔터티의 기본 키와 연결될 외래 키
-	private User user;
+	@Column(name = "user_seq") // User 엔터티의 기본 키와 연결될 외래 키
+	private Long userSeq;
 
-	public Template(String templateTitle, String templateContent, User user) {
+	public Template(String templateTitle, String templateContent, Long userSeq) {
 		this.templateTitle = templateTitle;
 		this.templateContent = templateContent;
-		this.user = user;
+		this.userSeq = userSeq;
 	}
 
 	public void update(TemplateUpdateRequest req) {
