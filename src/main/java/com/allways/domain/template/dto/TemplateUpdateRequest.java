@@ -10,9 +10,9 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TemplateUpdateRequest {
-    @NotBlank(message = "제목을 입력해주세요.")
-    private String templateName;
+    @NotBlank(message = "템플릿 제목을 입력해주세요.")
+    private String templateTitle;
 
-    @NotBlank(message = "내용을 입력해주세요.")
+    @NotBlank(message = "템플릿 내용을 입력해주세요.")
     private String templateContent;
 }

@@ -1,11 +1,6 @@
-package com.allways.domain.template.domain;
+package com.allways.domain.template.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.*;
 
 import com.allways.common.EntityDate;
 
@@ -13,6 +8,8 @@ import com.allways.domain.template.dto.TemplateUpdateRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Getter
 @Entity
@@ -24,23 +21,25 @@ public class Template extends EntityDate {
 	private Long templateSeq;
 
 	@Column
-	private String templateName;
+	private String templateTitle;
 
 	@Column
 	@Lob
 	private String templateContent;
 
-	@Column(nullable = false)
-	private Long userSeq;
+	@ManyToOne // 다대일 관계 설정
+	@JoinColumn(name = "user_seq", nullable = false) // User 엔터티의 기본 키와 연결될 외래 키
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private User user;
 
-	public Template(String templateName, String templateContent, Long userSeq) {
-		this.templateName = templateName;
+	public Template(String templateTitle, String templateContent, User user) {
+		this.templateTitle = templateTitle;
 		this.templateContent = templateContent;
-		this.userSeq = userSeq;
+		this.user = user;
 	}
 
 	public void update(TemplateUpdateRequest req) {
-		this.templateName = req.getTemplateName();
+		this.templateTitle = req.getTemplateTitle();
 		this.templateContent = req.getTemplateContent();
 	}
 }

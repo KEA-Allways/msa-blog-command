@@ -1,6 +1,6 @@
 package com.allways.domain.template.service;
 
-import com.allways.domain.template.domain.Template;
+import com.allways.domain.template.entity.Template;
 import com.allways.domain.template.dto.*;
 import com.allways.domain.template.exception.TemplateNotFoundException;
 import com.allways.domain.template.repository.TemplateRepository;
@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @RequiredArgsConstructor
 @Service

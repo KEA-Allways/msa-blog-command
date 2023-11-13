@@ -4,6 +4,8 @@ import com.allways.domain.category.exception.CategoryNotFoundException;
 import com.allways.domain.category.repository.CategoryRepository;
 import com.allways.domain.post.entity.Image;
 import com.allways.domain.post.entity.Post;
+import com.allways.domain.post.entity.User;
+import com.allways.domain.post.service.UserFeignClientService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,6 +36,8 @@ public class PostCreateRequest {
 //    //api 호출
 //    private Long memberId;
 
+    private static UserFeignClientService userFeignClientService;
+
     @PositiveOrZero(message = "올바른 카테고리 아이디를 입력해주세요")
     private Long categoryId;
 
@@ -41,11 +45,12 @@ public class PostCreateRequest {
 
     //memberRepository 같은 경우 api 호출
     public static Post toEntity(PostCreateRequest req, CategoryRepository categoryRepository){
+        //feignClinet 값 넣기
+        UserDto user = userFeignClientService.getUserById(1L);
         return new Post(
                 req.title,
                 req.content,
-                //작성자 받아오기
-//                memberRepository.findById(req.getMemberId()).orElseThrow(MemberNotFoundException::new),
+                user,
                 //카테고리 받아오기
                 categoryRepository.findById(req.getCategoryId()).orElseThrow(CategoryNotFoundException::new),
                 req.images.stream().map(i->new Image(i.getOriginalFilename())).collect(toList())

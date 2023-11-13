@@ -1,18 +1,16 @@
 package com.allways.domain.post.service;
 
+import com.allways.common.response.Response;
 import com.allways.domain.category.repository.CategoryRepository;
 import com.allways.domain.post.dto.*;
-import com.allways.domain.post.entity.Image;
 import com.allways.domain.post.entity.Post;
+import com.allways.domain.post.feign.UserFeignClient;
 import com.allways.domain.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.allways.domain.post.exception.PostNotFoundException;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
-import java.util.stream.IntStream;
 
 @Service
 @Transactional(readOnly = true)
@@ -21,6 +19,10 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final CategoryRepository categoryRepository;
+    private final UserFeignClientService userFeignClientService;
+
+
+
 
 
 //    member server 에서 api 호출
@@ -49,11 +51,13 @@ public class PostService {
     //삭제
     @Transactional
     public void delete(Long id){
-        Post post =postRepository.findById(id).orElseThrow(PostNotFoundException::new);
+        Post post = postRepository.findById(id).orElseThrow(PostNotFoundException::new);
         //image 들 삭제해애함 파일에서 불러와야 하나?
 //        deleteImages(post.get)
         postRepository.delete(post);
     }
+
+
 
 //    @Transactional
 //    public PostUpdateResponse update(Long id, PostUpdateRequest req){
