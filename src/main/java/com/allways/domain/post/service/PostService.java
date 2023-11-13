@@ -19,7 +19,6 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final CategoryRepository categoryRepository;
-    private final UserFeignClientService userFeignClientService;
 
 
 

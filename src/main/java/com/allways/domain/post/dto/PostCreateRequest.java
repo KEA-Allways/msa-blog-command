@@ -46,7 +46,7 @@ public class PostCreateRequest {
     //memberRepository 같은 경우 api 호출
     public static Post toEntity(PostCreateRequest req, CategoryRepository categoryRepository){
         //feignClinet 값 넣기
-        UserDto user = userFeignClientService.getUserById(1L);
+        UserDto user = userFeignClientService.getUserById(3L);
         return new Post(
                 req.title,
                 req.content,
