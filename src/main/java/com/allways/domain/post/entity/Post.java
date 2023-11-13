@@ -4,10 +4,8 @@ import javax.persistence.*;
 
 import com.allways.common.EntityDate;
 import com.allways.domain.category.entity.Category;
-import com.allways.domain.post.dto.UserDto;
-import com.allways.domain.post.entity.Image;
+import com.allways.common.feign.user.UserDto;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +23,7 @@ public class Post extends EntityDate  {
 	private Long postSeq;
 
 	@Column(nullable = false)
-	private String postName;
+	private String postTitle;
 
 	@Column(nullable = false)
 	@Lob
@@ -50,17 +48,16 @@ public class Post extends EntityDate  {
 	private UserDto user;
 
 	//post 와 image 간의 관계
-		@OneToMany(mappedBy = "post",cascade = CascadeType.PERSIST,orphanRemoval = true)
-		private List<Image> images; //3
+	@OneToMany(mappedBy = "post",cascade = CascadeType.PERSIST,orphanRemoval = true)
+	private List<Image> images; //3
 
-	public Post(String postName,String postContent,UserDto user
-			, Category category,List<Image> images){
-		this.postName=postName;
+	public Post(String postTitle, String postContent, UserDto user
+			, Category category, List<Image> images){
+		this.postTitle=postTitle;
 		this.postContent=postContent;
 		this.user=user;
 //		this.postView =postView;
 		this.category=category;
 		this.images=new ArrayList<>();
 	}
-
 }

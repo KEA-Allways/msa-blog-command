@@ -1,23 +1,20 @@
 package com.allways.domain.post.dto;
 
+import com.allways.common.feign.user.UserDto;
 import com.allways.domain.category.exception.CategoryNotFoundException;
 import com.allways.domain.category.repository.CategoryRepository;
 import com.allways.domain.post.entity.Image;
 import com.allways.domain.post.entity.Post;
-import com.allways.domain.post.entity.User;
-import com.allways.domain.post.service.UserFeignClientService;
+import com.allways.common.feign.user.UserFeignClientService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -56,5 +53,4 @@ public class PostCreateRequest {
                 req.images.stream().map(i->new Image(i.getOriginalFilename())).collect(toList())
         );
     }
-
 }

@@ -4,8 +4,6 @@ import com.allways.domain.post.entity.Image;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.awt.*;
-
 @Data
 @AllArgsConstructor
 public class ImageDto {
