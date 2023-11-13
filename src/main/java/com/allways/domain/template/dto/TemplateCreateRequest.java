@@ -24,7 +24,7 @@ public class TemplateCreateRequest {
     private String templateContent;
 
     public static Template toEntity(TemplateCreateRequest req) {
-        UserDto userDto = userFeignClient.getUserById(1L);
+        UserDto userDto = userFeignClient.getUserById(3L);
         User user = new User(userDto.getId(), userDto.getPassword(),
                 userDto.getNickname(), userDto.getEmail(), userDto.getProfileImgSeq());
         return new Template(req.templateTitle, req.templateContent, user);
