@@ -20,8 +20,8 @@ public class TemplateCommandController {
     @PostMapping("/api/templates/new-template")
     @ResponseStatus(HttpStatus.CREATED)
     public Response create(@RequestBody TemplateCreateRequest req) {
-        templateCommandService.create(req);
-        return Response.success();
+        // 생성시 생성된 templateSeq를 return 해준다.
+        return Response.success(templateCommandService.create(req));
     }
 
     // 선택된 템플릿(서식) Seq에 해당하는 template 수정하기(update)
