@@ -14,21 +14,24 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class TemplateCommandController {
     private final TemplateCommandService templateCommandService;
+    // CUD의 경우 명령의 결과값으로 Front에 전달할 값이 없으므로 단순히 Response.success()를 반환한다.
 
     // 템플릿(서식) 생성하기(create)
     @PostMapping("/api/templates/new-template")
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@ModelAttribute TemplateCreateRequest req) {
-        Response.success(templateCommandService.create(req));
+    public Response create(@ModelAttribute TemplateCreateRequest req) {
+        templateCommandService.create(req);
+        return Response.success();
     }
 
     // 선택된 템플릿(서식) Seq에 해당하는 template 수정하기(update)
     // TemplateUpdateRequest의 내용물은 templateName과 templateContent다
     @PostMapping("/api/templates/{templateSeq}")
     @ResponseStatus(HttpStatus.OK)
-    public void updateTemplate(@PathVariable Long templateSeq,
+    public Response updateTemplate(@PathVariable Long templateSeq,
                                @ModelAttribute TemplateUpdateRequest req) {
         templateCommandService.update(templateSeq, req);
+        return Response.success();
     }
 
     // 선택된 템플릿(서식) Seq에 해당하는 template 삭제하기(delete)

@@ -24,7 +24,7 @@ public class Template extends EntityDate {
 	private Long templateSeq;
 
 	@Column
-	private String templateName;
+	private String templateTitle;
 
 	@Column
 	@Lob
@@ -33,14 +33,14 @@ public class Template extends EntityDate {
 	@Column(nullable = false)
 	private Long userSeq;
 
-	public Template(String templateName, String templateContent, Long userSeq) {
-		this.templateName = templateName;
+	public Template(String templateTitle, String templateContent, Long userSeq) {
+		this.templateTitle = templateTitle;
 		this.templateContent = templateContent;
 		this.userSeq = userSeq;
 	}
 
 	public void update(TemplateUpdateRequest req) {
-		this.templateName = req.getTemplateName();
+		this.templateTitle = req.getTemplateTitle();
 		this.templateContent = req.getTemplateContent();
 	}
 }

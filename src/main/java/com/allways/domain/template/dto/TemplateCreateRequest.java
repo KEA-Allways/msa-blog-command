@@ -13,13 +13,13 @@ import javax.validation.constraints.NotBlank;
 public class TemplateCreateRequest {
 
     @NotBlank(message = "제목을 입력해주세요.")
-    private String templateName;
+    private String templateTitle;
 
     @NotBlank(message = "내용을 입력해주세요.")
     private String templateContent;
 
     // userSeq를 API로 받아야 하기에 일단은 임시로 1L 입력해 둠
     public static Template toEntity(TemplateCreateRequest req) {
-        return new Template(req.templateName, req.templateContent, 1L);
+        return new Template(req.templateTitle, req.templateContent, 1L);
     }
 }
