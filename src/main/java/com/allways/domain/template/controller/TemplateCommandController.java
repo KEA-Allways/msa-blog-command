@@ -19,7 +19,7 @@ public class TemplateCommandController {
     // 템플릿(서식) 생성하기(create)
     @PostMapping("/api/templates/new-template")
     @ResponseStatus(HttpStatus.CREATED)
-    public Response create(@ModelAttribute TemplateCreateRequest req) {
+    public Response create(@RequestBody TemplateCreateRequest req) {
         templateCommandService.create(req);
         return Response.success();
     }
@@ -29,7 +29,7 @@ public class TemplateCommandController {
     @PostMapping("/api/templates/{templateSeq}")
     @ResponseStatus(HttpStatus.OK)
     public Response updateTemplate(@PathVariable Long templateSeq,
-                               @ModelAttribute TemplateUpdateRequest req) {
+                               @RequestBody TemplateUpdateRequest req) {
         templateCommandService.update(templateSeq, req);
         return Response.success();
     }
