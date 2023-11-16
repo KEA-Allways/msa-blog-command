@@ -19,14 +19,14 @@ public class ReplyCommandController {
     public Response create(@PathVariable Long postSeq, @Valid @RequestBody ReplyCreateRequest req) {
         //path로 받은 postSeq를 req에 세팅
         req.setPostSeq(postSeq);
-        replyCommandService.create(req);
+        replyCommandService.createReply(req);
         return Response.success();
     }
 
     @DeleteMapping("/api/posts/{postSeq}/replies/{replySeq}")
     @ResponseStatus(HttpStatus.OK)
     public Response delete(@PathVariable Long replySeq) {
-        replyCommandService.delete(replySeq);
+        replyCommandService.deleteReply(replySeq);
         return Response.success();
     }
 }
