@@ -26,10 +26,10 @@ public class TemplateCommandController {
 
     // 선택된 템플릿(서식) Seq에 해당하는 template 수정하기(update)
     // TemplateUpdateRequest의 내용물은 templateName과 templateContent다
-    @PostMapping("/api/templates/{templateSeq}")
+    @PutMapping ("/api/templates/{templateSeq}")
     @ResponseStatus(HttpStatus.OK)
     public void updateTemplate(@PathVariable Long templateSeq,
-                               @ModelAttribute TemplateUpdateRequest req) {
+                               @RequestBody TemplateUpdateRequest req) {
         templateCommandService.update(templateSeq, req);
     }
 
