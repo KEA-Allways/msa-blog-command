@@ -1,6 +1,5 @@
 package com.allways.domain.template.service;
 
-import com.allways.common.feign.user.UserFeignClientService;
 import com.allways.domain.template.entity.Template;
 import com.allways.domain.template.dto.*;
 import com.allways.domain.template.exception.TemplateNotFoundException;

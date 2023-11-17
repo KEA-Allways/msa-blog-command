@@ -4,12 +4,11 @@ import javax.persistence.*;
 
 import com.allways.common.EntityDate;
 import com.allways.domain.category.entity.Category;
-import com.allways.common.feign.user.UserDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;

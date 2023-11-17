@@ -1,6 +1,5 @@
 package com.allways.domain.post.service;
 
-import com.allways.common.feign.user.UserFeignClientService;
 import com.allways.domain.category.repository.CategoryRepository;
 import com.allways.domain.post.dto.*;
 import com.allways.domain.post.entity.Post;

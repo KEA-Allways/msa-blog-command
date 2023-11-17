@@ -4,7 +4,6 @@ import javax.persistence.*;
 
 import com.allways.common.EntityDate;
 
-import com.allways.common.feign.user.User;
 import com.allways.domain.template.dto.TemplateUpdateRequest;
 import lombok.AccessLevel;
 import lombok.Getter;

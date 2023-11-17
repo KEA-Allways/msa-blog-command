@@ -1,11 +1,9 @@
 package com.allways.domain.post.dto;
 
-import com.allways.common.feign.user.UserDto;
 import com.allways.domain.category.exception.CategoryNotFoundException;
 import com.allways.domain.category.repository.CategoryRepository;
 import com.allways.domain.post.entity.Image;
 import com.allways.domain.post.entity.Post;
-import com.allways.common.feign.user.UserFeignClientService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,13 +25,6 @@ public class PostCreateRequest {
 
     @NotBlank(message = "게시글 본문을 입력해주세요")
     private String content;
-
-
-//    @Null
-//    //api 호출
-//    private Long memberId;
-
-    private static UserFeignClientService userFeignClientService;
 
     @PositiveOrZero(message = "올바른 카테고리 아이디를 입력해주세요")
     private Long categoryId;
