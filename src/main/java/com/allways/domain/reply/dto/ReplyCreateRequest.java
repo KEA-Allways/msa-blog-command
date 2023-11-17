@@ -9,6 +9,4 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReplyCreateRequest {
     private String replyContent;
-    private Long postSeq;
-    private Long userSeq;
 }

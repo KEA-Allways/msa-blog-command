@@ -16,16 +16,15 @@ public class ReplyCommandController {
 
     @PostMapping("/api/posts/{postSeq}/replies")
     @ResponseStatus(HttpStatus.CREATED)
-    public Response create(@PathVariable Long postSeq, @Valid @RequestBody ReplyCreateRequest req) {
-        //path로 받은 postSeq를 req에 세팅
-        req.setPostSeq(postSeq);
-        replyCommandService.createReply(req);
+    public Response createReply(@PathVariable Long postSeq, @RequestBody ReplyCreateRequest req) {
+        Long userSeq = 1L;
+        replyCommandService.createReply(req, postSeq, userSeq);
         return Response.success();
     }
 
     @DeleteMapping("/api/posts/{postSeq}/replies/{replySeq}")
     @ResponseStatus(HttpStatus.OK)
-    public Response delete(@PathVariable Long replySeq) {
+    public Response deleteReply(@PathVariable Long replySeq) {
         replyCommandService.deleteReply(replySeq);
         return Response.success();
     }
