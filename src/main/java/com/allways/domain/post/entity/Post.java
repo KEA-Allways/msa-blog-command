@@ -4,7 +4,6 @@ import javax.persistence.*;
 
 import com.allways.common.EntityDate;
 import com.allways.domain.category.entity.Category;
-import com.allways.common.feign.user.UserDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -44,20 +43,21 @@ public class Post extends EntityDate  {
 	// // @OnDelete(action = OnDeleteAction.CASCADE)
 	// private User user;
 
-	@Transient //데이터베이스에 저장하지 않도록 설정
-	private UserDto user;
+	@Column
+	private Long userSeq;
 
 	//post 와 image 간의 관계
-	@OneToMany(mappedBy = "post",cascade = CascadeType.PERSIST,orphanRemoval = true)
-	private List<Image> images; //3
+//	@OneToMany(mappedBy = "post",orphanRemoval = true)
+//	private List<Image> images; //3
 
-	public Post(String postTitle, String postContent, UserDto user
-			, Category category, List<Image> images){
+	public Post(String postTitle, String postContent, Long userSeq, Category category
+			// , List<Image> images
+			){
 		this.postTitle=postTitle;
 		this.postContent=postContent;
-		this.user=user;
+		this.userSeq=userSeq;
 //		this.postView =postView;
 		this.category=category;
-		this.images=new ArrayList<>();
+		//this.images=new ArrayList<>();
 	}
 }

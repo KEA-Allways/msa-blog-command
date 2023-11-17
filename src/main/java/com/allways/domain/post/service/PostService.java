@@ -1,6 +1,5 @@
 package com.allways.domain.post.service;
 
-import com.allways.common.feign.user.UserFeignClientService;
 import com.allways.domain.category.repository.CategoryRepository;
 import com.allways.domain.post.dto.*;
 import com.allways.domain.post.entity.Post;
@@ -17,7 +16,6 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final CategoryRepository categoryRepository;
-    private final UserFeignClientService userFeignClientService;
 
 //    member server 에서 api 호출
 //    private final memberRepository
@@ -25,11 +23,12 @@ public class PostService {
 //    private final FileService
 
     @Transactional
-    public PostCreateResponse create(PostCreateRequest req){
+    public PostCreateResponse createPost(PostCreateRequest req, Long userSeq){
         Post post=postRepository.save(
                 PostCreateRequest.toEntity(
                         req,
-                        categoryRepository
+                        categoryRepository,
+                        userSeq
                 )
         );
 
@@ -37,18 +36,10 @@ public class PostService {
 
     }
 
-    //읽기
-    public PostDto read(Long id) {
-        return PostDto.toDto(postRepository.findById(id).orElseThrow(PostNotFoundException::new));
-    }
-
     //삭제
     @Transactional
-    public void delete(Long id){
-        Post post = postRepository.findById(id).orElseThrow(PostNotFoundException::new);
-        //image 들 삭제해애함 파일에서 불러와야 하나?
-//        deleteImages(post.get)
-        postRepository.delete(post);
+    public void deletePost(Long postSeq){
+        postRepository.deleteById(postSeq);
     }
 
 
