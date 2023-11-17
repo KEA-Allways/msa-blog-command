@@ -1,4 +1,4 @@
-package com.allways.domain.reply.domain;
+package com.allways.domain.reply.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
