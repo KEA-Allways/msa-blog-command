@@ -1,4 +1,4 @@
-package com.allways.domain.theme.entity;
+package com.allways.domain.theme.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,7 +1,7 @@
 package com.allways.domain.theme.service;
 
 import com.allways.domain.theme.entity.Theme;
-import com.allways.domain.theme.entity.ThemeCreateRequest;
+import com.allways.domain.theme.dto.ThemeCreateRequest;
 import com.allways.domain.theme.exception.ThemeNotFoundException;
 import com.allways.domain.theme.repository.ThemeRepository;
 import lombok.RequiredArgsConstructor;
