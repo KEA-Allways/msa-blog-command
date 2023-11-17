@@ -1,11 +1,9 @@
 package com.allways.domain.post.dto;
 
-import com.allways.common.feign.user.UserDto;
 import com.allways.domain.category.exception.CategoryNotFoundException;
 import com.allways.domain.category.repository.CategoryRepository;
 import com.allways.domain.post.entity.Image;
 import com.allways.domain.post.entity.Post;
-import com.allways.common.feign.user.UserFeignClientService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,24 +31,20 @@ public class PostCreateRequest {
 //    //api 호출
 //    private Long memberId;
 
-    private static UserFeignClientService userFeignClientService;
-
     @PositiveOrZero(message = "올바른 카테고리 아이디를 입력해주세요")
     private Long categoryId;
 
     private List<MultipartFile> images = new ArrayList<>();
 
     //memberRepository 같은 경우 api 호출
-    public static Post toEntity(PostCreateRequest req, CategoryRepository categoryRepository){
-        //feignClinet 값 넣기
-        UserDto user = userFeignClientService.getUserById(1L);
+    public static Post toEntity(PostCreateRequest req, CategoryRepository categoryRepository,Long userSeq){
         return new Post(
                 req.title,
                 req.content,
-                user,
+                userSeq,
                 //카테고리 받아오기
-                categoryRepository.findById(req.getCategoryId()).orElseThrow(CategoryNotFoundException::new),
-                req.images.stream().map(i->new Image(i.getOriginalFilename())).collect(toList())
+                categoryRepository.findById(req.getCategoryId()).orElseThrow(CategoryNotFoundException::new)
+                //req.images.stream().map(i->new Image(i.getOriginalFilename())).collect(toList())
         );
     }
 }
