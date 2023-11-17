@@ -10,9 +10,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import static java.util.stream.Collectors.toList;
 
 @Getter
 @Entity
@@ -59,8 +63,61 @@ public class Post extends EntityDate  {
 		this.postTitle=postTitle;
 		this.postContent=postContent;
 		this.userSeq=userSeq;
-
 		this.category=category;
 		this.images=new ArrayList<>();
+	}
+
+//	public ImageUpdatedResult update(PostUpdateRequest req){
+//		this.postTitle=req.getTitle();
+//		this.postContent=req.getContent();
+//		this.userSeq = req.getUserSeq();
+//		ImageUpdatedResult result =findImageUpdatedResult(req.getAddedImages(),req.getDeletedImages());
+//		addImages(result.getAddedImages());
+//		deleteImages(result.getDeletedImages());
+//		return result;
+//	}
+
+	@Getter
+	@AllArgsConstructor
+	public static class ImageUpdatedResult{
+		private List<MultipartFile> addedImageFiles;
+		private List<Image> addedImages;
+		private List<Image> deletedImages;
+
+	}
+
+
+	private void addImages(List<Image> added){ //5
+		added.stream().forEach(i->{
+			images.add(i);
+			i.initPost(this);
+		});
+	}
+
+
+	private void deleteImages(List<Image> deleted){
+		deleted.stream().forEach(di->this.images.remove(di));
+	}
+
+
+
+	private ImageUpdatedResult findImageUpdatedResult(List<MultipartFile> addedImageFiles,List<Long> deletedImageIds){
+		List<Image> addedImages = convertImageFilesToImages(addedImageFiles);
+		List<Image> deletedImages = convertImageIdsToImages(deletedImageIds);
+		return new ImageUpdatedResult(addedImageFiles,addedImages,deletedImages);
+	}
+
+	private List<Image> convertImageIdsToImages(List<Long> imageIds) {
+		return imageIds.stream()
+				.map(id->convertImageIdImage(id))
+				.filter(i->i.isPresent())
+				.map(i->i.get())
+				.collect(toList());
+	}
+	private Optional<Image> convertImageIdImage(Long id){
+		return this.images.stream().filter(i->i.getId().equals(id)).findAny();
+	}
+	private List<Image> convertImageFilesToImages(List<MultipartFile> imageFiles) {
+		return imageFiles.stream().map(imageFile->new Image(imageFile.getOriginalFilename())).collect(toList());
 	}
 }

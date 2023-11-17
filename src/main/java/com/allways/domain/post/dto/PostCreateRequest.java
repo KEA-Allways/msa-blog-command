@@ -51,8 +51,11 @@ public class PostCreateRequest {
         return new Post(
                 req.title,
                 req.content,
+                //jwt 받아오기
                 3L,
                 //카테고리 받아오기
+                //post service에서 받아오기
+                // 카테고리 뭐시기 하고
                 categoryRepository.findById(req.getCategoryId()).orElseThrow(CategoryNotFoundException::new),
                 req.images.stream().map(i->new Image(i.getOriginalFilename())).collect(toList())
         );

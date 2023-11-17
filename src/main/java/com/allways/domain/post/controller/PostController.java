@@ -20,7 +20,7 @@ public class PostController {
     //게시글 생성
     @PostMapping("/api/posts")
     @ResponseStatus(HttpStatus.CREATED)
-    public Response create(@ModelAttribute PostCreateRequest req){
+    public Response create(PostCreateRequest req){
 
         return Response.success (postService.create(req));
     }
@@ -31,13 +31,15 @@ public class PostController {
     public Response read(@PathVariable Long id){
         return Response.success(postService.read(id));
     }
-    //게시글 수정
-//    @PutMapping("/apit/posts/{id}")
+
+
+//    게시글 수정
+//    @PutMapping("/api/posts/{seq}")
 //    @ResponseStatus(HttpStatus.OK)
 //    public Response update(
-//            @PathVariable Long id, @ModelAttribute PostUpdateRequest req
+//            @PathVariable Long seq, @ModelAttribute PostUpdateRequest req
 //            ){
-//        return Response.success(postService.update(id,req));
+//        return Response.success(postService.update(seq,req));
 //    }
 
     //게시글 목록 조회
