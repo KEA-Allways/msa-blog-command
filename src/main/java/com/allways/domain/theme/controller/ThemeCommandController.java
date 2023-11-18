@@ -2,6 +2,7 @@ package com.allways.domain.theme.controller;
 
 import com.allways.common.response.Response;
 import com.allways.domain.theme.dto.ThemeCreateRequest;
+import com.allways.domain.theme.service.FastAPIService;
 import com.allways.domain.theme.service.ThemeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,12 +15,15 @@ import static com.allways.common.response.Response.success;
 public class ThemeCommandController {
 
     public final ThemeService themeService;
+    private final FastAPIService fastAPIService;
 
     @PostMapping("/api/themes/new-theme")
     @ResponseStatus(HttpStatus.CREATED)
     public Response createTheme(@RequestBody ThemeCreateRequest req){
         Long userSeq = 5L;
-        themeService.createTheme(req, userSeq);
+//        themeService.createTheme(req, userSeq);
+        fastAPIService.sendKeywordsToFastAPI(req.getPositivePrompt(),req.getNegativePrompt());
+
         return success();
     }
 
