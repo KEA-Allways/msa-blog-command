@@ -14,8 +14,22 @@ spring:
       properties:
         hibernate:
           format_sql: true
+
 server:
   port: 8085
+
+cloud:
+  aws:
+    s3:
+      bucket: suhabuckettest
+    credentials:
+      access-key: AKIARK2RR6BBSHEZNLVB
+      secret-key: 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
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
 # port: 0
 
 eureka:
