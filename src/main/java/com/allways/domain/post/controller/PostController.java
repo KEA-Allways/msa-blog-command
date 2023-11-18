@@ -2,6 +2,7 @@ package com.allways.domain.post.controller;
 
 import com.allways.common.response.Response;
 import com.allways.domain.post.dto.PostCreateRequest;
+import com.allways.domain.post.dto.PostUpdateRequest;
 import com.allways.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +18,9 @@ public class PostController {
     //게시글 생성
     @PostMapping("/api/posts/{userSeq}")
     @ResponseStatus(HttpStatus.CREATED)
-    public Response createPost(@ModelAttribute PostCreateRequest req, @PathVariable Long userSeq){
+    public Response createPost(@PathVariable Long userSeq,@ModelAttribute PostCreateRequest req ){
+        System.out.println(req.getPostTitle());
+        System.out.println(req.getPostContent());
         return Response.success(postService.createPost(req, userSeq));
     }
 
@@ -30,12 +33,12 @@ public class PostController {
     }
 
     //게시글 수정
-//    @PutMapping("/apit/posts/{id}")
+//    @PutMapping("/api/posts/{postSeq}")
 //    @ResponseStatus(HttpStatus.OK)
 //    public Response update(
-//            @PathVariable Long id, @ModelAttribute PostUpdateRequest req
+//            @PathVariable Long postSeq, @ModelAttribute PostUpdateRequest req
 //            ){
-//        return Response.success(postService.update(id,req));
+//        return Response.success(postService.update(postSeq,req));
 //    }
 
 }

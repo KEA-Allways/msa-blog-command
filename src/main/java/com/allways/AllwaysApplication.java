@@ -6,7 +6,14 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-@SpringBootApplication
+//aws log error 나오는거 막기위해서
+@SpringBootApplication(
+		exclude = {
+				org.springframework.cloud.aws.autoconfigure.context.ContextInstanceDataAutoConfiguration.class,
+				org.springframework.cloud.aws.autoconfigure.context.ContextStackAutoConfiguration.class,
+				org.springframework.cloud.aws.autoconfigure.context.ContextRegionProviderAutoConfiguration.class
+		}
+)
 @EnableDiscoveryClient
 @EnableJpaAuditing
 @EnableFeignClients
