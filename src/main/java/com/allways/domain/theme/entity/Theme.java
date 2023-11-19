@@ -37,5 +37,4 @@ public class Theme extends EntityDate {
 		this.themeOrder = themeOrder;
 		this.userSeq = userSeq;
 	}
-
 }

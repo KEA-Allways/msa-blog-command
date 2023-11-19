@@ -9,6 +9,6 @@ public interface CategoryRepository extends JpaRepository<Category,Long> {
     //계층화 작업은 나중에 생각하기
 //    @Query("select c from Category c left join c.parent p order by p.id asc nulls first,c.id asc")
 //    List<Category> findAllOrderByParentIdAscNullsFirstCategoryIdAsc()
-    @Query("select COALESCE(max(categoryOrder), 0) from Category t where t.themeSeq = :themeSeq")
+    @Query("select COALESCE(max(t.categoryOrder), 0) from Category t where t.themeSeq = :themeSeq")
     Long findLastCategoryOrderByThemeSeq(@Param("themeSeq") Long themeSeq);
 }

@@ -43,10 +43,9 @@ public class Category extends EntityDate  {
 //	@OnDelete(action = OnDeleteAction.CASCADE)
 //	private Theme theme;
 
-	public Category(String categoryName, Long categoryOrder ,Long themeSeq){
+	public Category(String categoryName, Long categoryOrder, Long themeSeq){
         this.categoryName = categoryName;
         this.categoryOrder = categoryOrder;
-        this.themeSeq =themeSeq;
+        this.themeSeq = themeSeq;
 	}
-
 }

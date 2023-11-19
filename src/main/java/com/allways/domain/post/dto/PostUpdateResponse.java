@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class PostUpdateResponse {
-    public Long id ;
+    public Long postSeq ;
 }

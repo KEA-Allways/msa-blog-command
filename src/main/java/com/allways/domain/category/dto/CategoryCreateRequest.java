@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CategoryCreateRequest {
-    private String categoryName;
 
+    private String categoryName;
     private Long themeSeq;
 }

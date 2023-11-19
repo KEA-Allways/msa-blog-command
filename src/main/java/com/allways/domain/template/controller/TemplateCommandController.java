@@ -17,6 +17,7 @@ public class TemplateCommandController {
     private final TemplateCommandService templateCommandService;
 
     // 템플릿(서식) 생성하기(create)
+    // userSeq를 헤더에서 가져와서 사용하기 추가
     @PostMapping("/api/templates/new-template")
     @ResponseStatus(HttpStatus.CREATED)
     public Response createTemplate(@RequestBody TemplateCreateRequest req,

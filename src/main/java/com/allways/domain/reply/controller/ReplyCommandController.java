@@ -14,21 +14,28 @@ import org.springframework.web.bind.annotation.*;
 public class ReplyCommandController {
     private final ReplyService replyService;
 
+    // userSeq 헤더에서 가져오는 방식으로 수정함
     @PostMapping("/api/posts/{postSeq}/replies")
     @ResponseStatus(HttpStatus.CREATED)
-    public Response createReply(@PathVariable Long postSeq, @RequestBody ReplyCreateRequest req) {
-        Long userSeq = 1L;
+    public Response createReply(@PathVariable Long postSeq,
+                                @RequestHeader(value = "userSeq") Long userSeq,
+                                @RequestBody ReplyCreateRequest req) {
         replyService.createReply(req, postSeq, userSeq);
         return Response.success();
     }
 
+    // 여기서 postSeq가 왜 필요한지 잘 모르겠네
+    // 필요하면 PathVariable Long postSeq도 사용해야 하지 않을까
     @PutMapping("/api/posts/{postSeq}/replies/{replySeq}")
     @ResponseStatus(HttpStatus.OK)
-    public Response updateReply(@PathVariable Long replySeq, @RequestBody ReplyUpdateRequest req){
+    public Response updateReply(@PathVariable Long replySeq,
+                                @RequestBody ReplyUpdateRequest req){
         replyService.updateReply(replySeq, req);
         return Response.success();
     }
 
+    // 여기도 마찬가지
+    // 필요하면 PathVariable Long postSeq도 사용해야 하지 않을까
     @DeleteMapping("/api/posts/{postSeq}/replies/{replySeq}")
     @ResponseStatus(HttpStatus.OK)
     public Response deleteReply(@PathVariable Long replySeq) {

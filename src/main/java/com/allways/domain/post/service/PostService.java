@@ -18,13 +18,8 @@ public class PostService {
     private final CategoryRepository categoryRepository;
 
     @Transactional
-    public PostCreateResponse createPost(PostCreateRequest req,Long userSeq){
-        Post post=postRepository.save(
-                PostCreateRequest.toEntity(
-                        req,
-                        userSeq
-                )
-        );
+    public PostCreateResponse createPost(PostCreateRequest req, Long userSeq){
+        Post post = postRepository.save(PostCreateRequest.toEntity(req, userSeq));
         return new PostCreateResponse(post.getPostSeq());
     }
 
@@ -61,5 +56,4 @@ public class PostService {
 //                postRepository.findAllByCondition(cond)
 //        );
 //    }
-
 }

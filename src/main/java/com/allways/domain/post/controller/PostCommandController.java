@@ -13,7 +13,7 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 @Slf4j
 @CrossOrigin(origins = "http://localhost:3000")
-public class PostController {
+public class PostCommandController {
     private final PostService postService;
 
     // 게시글 생성
@@ -36,8 +36,7 @@ public class PostController {
     // 게시글 수정
     @PutMapping("/api/posts/{postSeq}")
     @ResponseStatus(HttpStatus.OK)
-    public Response updatePost(@PathVariable Long postSeq,
-                               @ModelAttribute PostUpdateRequest req){
+    public Response updatePost(@ModelAttribute PostUpdateRequest req, @PathVariable Long postSeq){
         return Response.success(postService.updatePost(req, postSeq));
     }
 

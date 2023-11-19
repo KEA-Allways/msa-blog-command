@@ -47,14 +47,11 @@ public class Post extends EntityDate  {
 //	@OneToMany(mappedBy = "post",orphanRemoval = true)
 //	private List<Image> images; //3
 
-	public Post(String postTitle, String postContent, Long userSeq, Long categorySeq
-
-			){
-		this.postTitle=postTitle;
-		this.postContent=postContent;
-		this.userSeq=userSeq;
+	public Post(String postTitle, String postContent, Long userSeq, Long categorySeq) {
+		this.postTitle = postTitle;
+		this.postContent = postContent;
+		this.userSeq = userSeq;
 //		this.postView =postView;
-		this.categorySeq=categorySeq;
-
+		this.categorySeq = categorySeq;
 	}
 }

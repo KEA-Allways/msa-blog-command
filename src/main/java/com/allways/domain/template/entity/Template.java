@@ -25,17 +25,12 @@ public class Template extends EntityDate {
 	@Lob
 	private String templateContent;
 
-	@Column(name = "user_seq") // User 엔터티의 기본 키와 연결될 외래 키
+	@Column
 	private Long userSeq;
 
 	public Template(String templateTitle, String templateContent, Long userSeq) {
 		this.templateTitle = templateTitle;
 		this.templateContent = templateContent;
 		this.userSeq = userSeq;
-	}
-
-	public void update(TemplateUpdateRequest req) {
-		this.templateTitle = req.getTemplateTitle();
-		this.templateContent = req.getTemplateContent();
 	}
 }
