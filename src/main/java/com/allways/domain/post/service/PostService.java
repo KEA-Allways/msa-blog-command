@@ -34,8 +34,12 @@ public class PostService {
         postRepository.deleteById(postSeq);
     }
 
-
-
+    @Transactional
+    public PostUpdateResponse updatePost(PostUpdateRequest req, Long postSeq) {
+        // update 내용 추가 바람!!!!
+        return new PostUpdateResponse(postSeq);
+    }
+//
 //    @Transactional
 //    public PostUpdateResponse updatePost(Long postSeq, PostUpdateRequest req){
 //        Post post=postRepository.findById(postSeq).orElseThrow(PostNotFoundException::new);
