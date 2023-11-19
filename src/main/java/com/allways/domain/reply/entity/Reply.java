@@ -1,4 +1,4 @@
-package com.allways.domain.reply.domain;
+package com.allways.domain.reply.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,23 +28,16 @@ public class Reply extends EntityDate  {
 	@Column
 	private String replyContent;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "post_seq", nullable = false)
-	private Post post;
-
-	// @ManyToOne(fetch = FetchType.LAZY)
-	// @JoinColumn(name = "user_seq", nullable = false)
-	// private User user;
+	@Column
+	private Long postSeq;
 
 	@Column
 	private Long userSeq;
 
 
-	public Reply(String content, Post post, Long UserSeq) {
+	public Reply(String content, Long postSeq, Long UserSeq) {
 		this.replyContent = content;
-		//this.member = member;
-		this.post = post;
+		this.postSeq = postSeq;
 		this.userSeq = UserSeq;
-		//this.deleted = false;
 	}
 }

@@ -1,11 +1,8 @@
 package com.allways.domain.post.dto;
 
-import com.allways.common.feign.user.UserDto;
 import com.allways.domain.category.exception.CategoryNotFoundException;
 import com.allways.domain.category.repository.CategoryRepository;
-import com.allways.domain.post.entity.Image;
 import com.allways.domain.post.entity.Post;
-import com.allways.common.feign.user.UserFeignClientService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,34 +20,33 @@ import static java.util.stream.Collectors.toList;
 @AllArgsConstructor
 public class PostCreateRequest {
     @NotBlank(message = "게시글 제목을 입력해주세요")
-    private String title;
+    private String postTitle;
 
     @NotBlank(message = "게시글 본문을 입력해주세요")
-    private String content;
+    private String postContent;
 
 
 //    @Null
 //    //api 호출
 //    private Long memberId;
 
-    private static UserFeignClientService userFeignClientService;
-
     @PositiveOrZero(message = "올바른 카테고리 아이디를 입력해주세요")
-    private Long categoryId;
+    private Long categorySeq;
 
-    private List<MultipartFile> images = new ArrayList<>();
+
 
     //memberRepository 같은 경우 api 호출
-    public static Post toEntity(PostCreateRequest req, CategoryRepository categoryRepository){
-        //feignClinet 값 넣기
-        UserDto user = userFeignClientService.getUserById(1L);
+    public static Post toEntity(PostCreateRequest req, Long userSeq){
         return new Post(
-                req.title,
-                req.content,
-                user,
+                req.postTitle,
+                req.postContent,
                 //카테고리 받아오기
-                categoryRepository.findById(req.getCategoryId()).orElseThrow(CategoryNotFoundException::new),
-                req.images.stream().map(i->new Image(i.getOriginalFilename())).collect(toList())
+                userSeq,
+                //게시글 생성에서 뽑아오는것
+                req.categorySeq
+
+
+                //req.images.stream().map(i->new Image(i.getOriginalFilename())).collect(toList())
         );
     }
 }

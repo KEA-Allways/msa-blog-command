@@ -12,32 +12,31 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+@CrossOrigin(origins = "http://localhost:3000")
 public class TemplateCommandController {
     private final TemplateCommandService templateCommandService;
 
     // 템플릿(서식) 생성하기(create)
     @PostMapping("/api/templates/new-template")
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody TemplateCreateRequest req) {
-        //
-
-        Response.success(templateCommandService.create(req));
+    public Response createTemplate(@RequestBody TemplateCreateRequest req) {
+        return(Response.success(templateCommandService.createTemplate(req)));
     }
 
     // 선택된 템플릿(서식) Seq에 해당하는 template 수정하기(update)
     // TemplateUpdateRequest의 내용물은 templateName과 templateContent다
-    @PostMapping("/api/templates/{templateSeq}")
+    @PutMapping ("/api/templates/{templateSeq}")
     @ResponseStatus(HttpStatus.OK)
-    public void updateTemplate(@PathVariable Long templateSeq,
-                               @ModelAttribute TemplateUpdateRequest req) {
-        templateCommandService.update(templateSeq, req);
+    public Response updateTemplate(@PathVariable Long templateSeq, @RequestBody TemplateUpdateRequest req) {
+        templateCommandService.updateTemplate(templateSeq, req);
+        return Response.success();
     }
 
     // 선택된 템플릿(서식) Seq에 해당하는 template 삭제하기(delete)
     @DeleteMapping("/api/templates/{templateSeq}")
     @ResponseStatus(HttpStatus.OK)
-    public Response delete(@PathVariable Long templateSeq) {
-        templateCommandService.delete(templateSeq);
+    public Response deleteTemplate(@PathVariable Long templateSeq) {
+        templateCommandService.deleteTemplate(templateSeq);
         return Response.success(templateSeq);
     }
 }
