@@ -1,11 +1,7 @@
 package com.allways.domain.theme.controller;
 
 import com.allways.common.response.Response;
-<<<<<<< HEAD
-import com.allways.domain.theme.entity.ThemeCreateRequest;
-=======
-import com.allways.domain.theme.dto.ThemeCreateRequest;
->>>>>>> origin/dev
+   import com.allways.domain.theme.entity.ThemeCreateRequest;
 import com.allways.domain.theme.service.ThemeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
