@@ -13,6 +13,7 @@ import com.allways.common.EntityDate;
 import com.allways.domain.theme.domain.Theme;
 
 import lombok.AccessLevel;
+import lombok.Cleanup;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
@@ -33,15 +34,19 @@ public class Category extends EntityDate  {
 	@Column
 	private Long categoryOrder;
 
+	@Column
+    private Long themeSeq;
+
 	//나중에 생각해보기
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "theme_seq")
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	private Theme theme;
-	//
-	public Category(String name,Category Theme){
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "themeSeq")
+//	@OnDelete(action = OnDeleteAction.CASCADE)
+//	private Theme theme;
 
+	public Category(String categoryName, Long categoryOrder ,Long themeSeq){
+        this.categoryName = categoryName;
+        this.categoryOrder = categoryOrder;
+        this.themeSeq =themeSeq;
 	}
-
 
 }

@@ -9,13 +9,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Getter
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity(name = "CategoryEntity")
 public class Post extends EntityDate  {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)

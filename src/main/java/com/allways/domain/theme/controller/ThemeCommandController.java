@@ -12,6 +12,7 @@ import static com.allways.common.response.Response.success;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class ThemeCommandController {
 
     public final ThemeService themeService;

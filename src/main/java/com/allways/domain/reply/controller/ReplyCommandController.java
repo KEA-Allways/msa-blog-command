@@ -11,6 +11,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class ReplyCommandController {
     private final ReplyCommandService replyCommandService;
 
