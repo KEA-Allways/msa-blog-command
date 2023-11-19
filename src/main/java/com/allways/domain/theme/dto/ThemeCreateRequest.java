@@ -1,4 +1,4 @@
-package com.allways.domain.reply.dto;
+package com.allways.domain.theme.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReplyCreateRequest {
-    private String replyContent;
+public class ThemeCreateRequest {
+    private String themeName;
+    //private Long themeImgSeq;
 }

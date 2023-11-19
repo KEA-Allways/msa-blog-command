@@ -4,12 +4,12 @@ import javax.persistence.*;
 
 import com.allways.common.EntityDate;
 import com.allways.domain.category.entity.Category;
-import com.allways.domain.post.entity.Image;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +34,8 @@ public class Post extends EntityDate  {
 //	@Column
 //	private Long postView;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "category_seq", nullable = false)
-	// @OnDelete(action = OnDeleteAction.CASCADE)
-	private Category category;
+	 @Column
+	 private Long categorySeq;
 
 	//post 와 유저간의 관계
 	// @ManyToOne(fetch = FetchType.LAZY)
@@ -45,17 +43,21 @@ public class Post extends EntityDate  {
 	// // @OnDelete(action = OnDeleteAction.CASCADE)
 	// private User user;
 
-	//post 와 image 간의 관계
-		@OneToMany(mappedBy = "post",cascade = CascadeType.PERSIST,orphanRemoval = true)
-		private List<Image> images; //3
+	@Column
+	private Long userSeq;
 
-	public Post(String postTitle,String postContent
-			, Category category,List<Image> images){
+	//post 와 image 간의 관계
+//	@OneToMany(mappedBy = "post",orphanRemoval = true)
+//	private List<Image> images; //3
+
+	public Post(String postTitle, String postContent, Long userSeq, Long categorySeq
+
+			){
 		this.postTitle=postTitle;
 		this.postContent=postContent;
+		this.userSeq=userSeq;
 //		this.postView =postView;
-		this.category=category;
-		this.images=new ArrayList<>();
-	}
+		this.categorySeq=categorySeq;
 
+	}
 }
