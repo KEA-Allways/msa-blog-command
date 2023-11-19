@@ -1,4 +1,4 @@
-package com.allways.domain.theme.domain;
+package com.allways.domain.theme.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,5 +10,4 @@ import lombok.NoArgsConstructor;
 public class ThemeCreateRequest {
     private String themeName;
     //private Long themeImgSeq;
-    private Long userSeq;
 }

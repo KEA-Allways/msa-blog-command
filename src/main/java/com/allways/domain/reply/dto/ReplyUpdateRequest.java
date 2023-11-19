@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReplyCreateRequest {
+public class ReplyUpdateRequest {
     private String replyContent;
 }

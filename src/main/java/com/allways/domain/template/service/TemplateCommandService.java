@@ -26,14 +26,12 @@ public class TemplateCommandService {
 
     // 선택된 templateSeq에 해당하는 template 수정(update)
     public void updateTemplate(Long templateSeq, TemplateUpdateRequest req) {
-        Template template = templateRepository.findById(templateSeq).orElseThrow(TemplateNotFoundException::new);
-        template.update(req);
+        templateRepository.updateById(templateSeq, req.getTemplateContent(), req.getTemplateTitle());
+
     }
 
     // 선택된 templateSeq에 해당하는 template 삭제(delete)
     public void deleteTemplate(Long templateSeq) {
-        Template template = templateRepository.findById(templateSeq)
-                .orElseThrow(TemplateNotFoundException::new);
-        templateRepository.delete(template);
+        templateRepository.deleteById(templateSeq);
     }
 }

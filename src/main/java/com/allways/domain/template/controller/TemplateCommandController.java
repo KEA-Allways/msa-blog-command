@@ -27,8 +27,7 @@ public class TemplateCommandController {
     // TemplateUpdateRequest의 내용물은 templateName과 templateContent다
     @PutMapping ("/api/templates/{templateSeq}")
     @ResponseStatus(HttpStatus.OK)
-    public Response updateTemplate(@PathVariable Long templateSeq,
-                               @RequestBody TemplateUpdateRequest req) {
+    public Response updateTemplate(@PathVariable Long templateSeq, @RequestBody TemplateUpdateRequest req) {
         templateCommandService.updateTemplate(templateSeq, req);
         return Response.success();
     }
