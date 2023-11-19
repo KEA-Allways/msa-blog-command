@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+@CrossOrigin(origins = "http://localhost:3000")
 public class PostController {
     private final PostService postService;
 
