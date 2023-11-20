@@ -9,20 +9,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import static com.allways.common.response.Response.success;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000/")
+
 public class ThemeCommandController {
 
     public final ThemeService themeService;
-    private final FastAPIService fastAPIService;
 
     @PostMapping("/api/themes/new-theme")
     @ResponseStatus(HttpStatus.CREATED)
     public Response createTheme(@RequestBody ThemeCreateRequest req){
         Long userSeq = 5L;
-//        themeService.createTheme(req, userSeq);
-        fastAPIService.sendKeywordsToFastAPI(req.getPositivePrompt(),req.getNegativePrompt());
+        //req 에  themeName, imageUrl
+        themeService.createTheme(req, userSeq);
 
         return success();
     }
