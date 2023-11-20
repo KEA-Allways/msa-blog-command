@@ -18,9 +18,7 @@ public class TemplateCreateRequest {
     @NotBlank(message = "템플릿 내용을 입력해주세요.")
     private String templateContent;
 
-    public Template toEntity(TemplateCreateRequest req) {
-        // JWT 토큰에서 extractSubject로 User Seq 읽어내서 new Template의 변수로 입력
-        // UserDto userDto = userFeignClientService.getUserById(3L);
-        return new Template(req.templateTitle, req.templateContent, 1L);
+    public Template toEntity(TemplateCreateRequest req, Long userSeq) {
+        return new Template(req.templateTitle, req.templateContent, userSeq);
     }
 }

@@ -2,19 +2,15 @@ package com.allways.domain.theme.controller;
 
 import com.allways.common.response.Response;
 import com.allways.domain.theme.dto.ThemeCreateRequest;
-import com.allways.domain.theme.service.FastAPIService;
 import com.allways.domain.theme.service.ThemeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import static com.allways.common.response.Response.success;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000/")
-
 public class ThemeCommandController {
 
     public final ThemeService themeService;
@@ -23,9 +19,7 @@ public class ThemeCommandController {
     @ResponseStatus(HttpStatus.CREATED)
     public Response createTheme(@RequestBody ThemeCreateRequest req){
         Long userSeq = 5L;
-        //req 에  themeName, imageUrl
         themeService.createTheme(req, userSeq);
-
         return success();
     }
 

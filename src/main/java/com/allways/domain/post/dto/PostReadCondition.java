@@ -26,5 +26,4 @@ public class PostReadCondition {
 //    member 는 받아와야함
 //    private List<Long> memberId = new ArrayList<>();
 
-
 }

@@ -12,15 +12,16 @@ import org.springframework.http.HttpStatus;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-public class PostController {
+@CrossOrigin(origins = "http://localhost:3000")
+public class PostCommandController {
     private final PostService postService;
 
-    //게시글 생성
-    @PostMapping("/api/posts/{userSeq}")
+    // 게시글 생성
+    // Pathvariable로 userSeq를 받던 부분을 헤더에서 읽어오는 방식으로 변경
+    @PostMapping("/api/posts")
     @ResponseStatus(HttpStatus.CREATED)
-    public Response createPost(@PathVariable Long userSeq,@ModelAttribute PostCreateRequest req ){
-        System.out.println(req.getPostTitle());
-        System.out.println(req.getPostContent());
+    public Response createPost(@ModelAttribute PostCreateRequest req,
+                               @RequestHeader(value = "userSeq") Long userSeq) {
         return Response.success(postService.createPost(req, userSeq));
     }
 
@@ -32,13 +33,11 @@ public class PostController {
         return Response.success();
     }
 
-    //게시글 수정
-//    @PutMapping("/api/posts/{postSeq}")
-//    @ResponseStatus(HttpStatus.OK)
-//    public Response update(
-//            @PathVariable Long postSeq, @ModelAttribute PostUpdateRequest req
-//            ){
-//        return Response.success(postService.update(postSeq,req));
-//    }
+    // 게시글 수정
+    @PutMapping("/api/posts/{postSeq}")
+    @ResponseStatus(HttpStatus.OK)
+    public Response updatePost(@ModelAttribute PostUpdateRequest req, @PathVariable Long postSeq){
+        return Response.success(postService.updatePost(req, postSeq));
+    }
 
 }
