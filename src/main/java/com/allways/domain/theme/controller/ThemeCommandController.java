@@ -17,8 +17,7 @@ public class ThemeCommandController {
 
     @PostMapping("/api/themes/new-theme")
     @ResponseStatus(HttpStatus.CREATED)
-    public Response createTheme(@RequestBody ThemeCreateRequest req){
-        Long userSeq = 5L;
+    public Response createTheme(@RequestBody ThemeCreateRequest req ,@RequestHeader(value = "userSeq") Long userSeq){
         themeService.createTheme(req, userSeq);
         return success();
     }
