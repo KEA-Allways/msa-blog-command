@@ -9,5 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ThemeCreateRequest {
     private String themeName;
+    private String imageUrl;
     //private Long themeImgSeq;
 }
