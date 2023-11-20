@@ -14,7 +14,8 @@ import org.hibernate.annotations.OnDeleteAction;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "CategoryEntity")
+//@Entity(name = "CategoryEntity")
+@Entity
 public class Post extends EntityDate  {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
