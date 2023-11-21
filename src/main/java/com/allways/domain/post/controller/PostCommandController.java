@@ -20,8 +20,7 @@ public class PostCommandController {
     // Pathvariable로 userSeq를 받던 부분을 헤더에서 읽어오는 방식으로 변경
     @PostMapping("/api/posts")
     @ResponseStatus(HttpStatus.CREATED)
-    public Response createPost(@ModelAttribute PostCreateRequest req,
-                               @RequestHeader(value = "userSeq") Long userSeq) {
+    public Response createPost(@RequestBody PostCreateRequest req, @RequestHeader(value = "userSeq") Long userSeq) {
         return Response.success(postService.createPost(req, userSeq));
     }
 
@@ -36,7 +35,7 @@ public class PostCommandController {
     // 게시글 수정
     @PutMapping("/api/posts/{postSeq}")
     @ResponseStatus(HttpStatus.OK)
-    public Response updatePost(@ModelAttribute PostUpdateRequest req, @PathVariable Long postSeq){
+    public Response updatePost(@RequestBody PostUpdateRequest req, @PathVariable Long postSeq){
         return Response.success(postService.updatePost(req, postSeq));
     }
 
