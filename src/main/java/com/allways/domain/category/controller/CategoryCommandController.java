@@ -17,14 +17,14 @@ public class CategoryCommandController {
 
     public final CategoryService categoryService;
 
-    @PostMapping("/api/themes/{themeSeq}/categories/new-category")
+    @PostMapping("/api/theme/{themeSeq}/category")
     @ResponseStatus(HttpStatus.CREATED)
     public Response create(@PathVariable Long themeSeq, @RequestBody CategoryCreateRequest req){
         categoryService.createCategory(req, themeSeq);
         return success();
     }
 
-    @DeleteMapping("/api/categories/{categorySeq}")
+    @DeleteMapping("/api/category/{categorySeq}")
     @ResponseStatus(HttpStatus.OK)
     public Response delete(@PathVariable Long categorySeq){
         categoryService.deleteCategory(categorySeq);
