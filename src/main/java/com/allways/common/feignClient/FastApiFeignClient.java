@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
 @FeignClient(name = "fastApi", url = "http://localhost:8000")
 public interface FastApiFeignClient {
-    @PostMapping(value = "/receive_data", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/receive_data" )
     @ResponseStatus(HttpStatus.CREATED)
     void sendDataToFastApi(@RequestBody FastApiDataRequest request);
 }

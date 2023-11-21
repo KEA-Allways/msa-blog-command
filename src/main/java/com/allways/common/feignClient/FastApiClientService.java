@@ -9,6 +9,7 @@ public class FastApiClientService {
 
     @Autowired
     public FastApiClientService(FastApiFeignClient fastApiFeignClient) {
+
         this.fastApiFeignClient = fastApiFeignClient;
     }
 
