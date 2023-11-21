@@ -12,20 +12,18 @@ import org.springframework.http.HttpStatus;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin(origins = "http://localhost:3000")
 public class PostCommandController {
     private final PostService postService;
 
     // 게시글 생성
-    // Pathvariable로 userSeq를 받던 부분을 헤더에서 읽어오는 방식으로 변경
-    @PostMapping("/api/posts")
+    @PostMapping("/api/post")
     @ResponseStatus(HttpStatus.CREATED)
-    public Response createPost(@RequestBody PostCreateRequest req, @RequestHeader(value = "userSeq") Long userSeq) {
+    public Response createPost(@RequestHeader(value = "userSeq") Long userSeq, @RequestBody PostCreateRequest req) {
         return Response.success(postService.createPost(req, userSeq));
     }
 
     //게시글 삭제
-    @DeleteMapping("/api/posts/{postSeq}")
+    @DeleteMapping("/api/post/{postSeq}")
     @ResponseStatus(HttpStatus.OK)
     public Response deletePost(@PathVariable Long postSeq){
         postService.deletePost(postSeq);
@@ -33,9 +31,9 @@ public class PostCommandController {
     }
 
     // 게시글 수정
-    @PutMapping("/api/posts/{postSeq}")
+    @PutMapping("/api/post/{postSeq}")
     @ResponseStatus(HttpStatus.OK)
-    public Response updatePost(@RequestBody PostUpdateRequest req, @PathVariable Long postSeq){
+    public Response updatePost(@PathVariable Long postSeq, @RequestBody PostUpdateRequest req){
         return Response.success(postService.updatePost(req, postSeq));
     }
 

@@ -15,14 +15,14 @@ public class ThemeCommandController {
 
     public final ThemeService themeService;
 
-    @PostMapping("/api/themes/new-theme")
+    @PostMapping("/api/theme")
     @ResponseStatus(HttpStatus.CREATED)
-    public Response createTheme(@RequestBody ThemeCreateRequest req ,@RequestHeader(value = "userSeq") Long userSeq){
+    public Response createTheme(@RequestHeader(value = "userSeq") Long userSeq, @RequestBody ThemeCreateRequest req){
         themeService.createTheme(req, userSeq);
         return success();
     }
 
-    @DeleteMapping("/api/themes/{themeSeq}")
+    @DeleteMapping("/api/theme/{themeSeq}")
     @ResponseStatus(HttpStatus.OK)
     public Response deleteTheme(@PathVariable Long themeSeq){
         themeService.deleteTheme(themeSeq);
