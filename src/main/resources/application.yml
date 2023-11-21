@@ -14,8 +14,22 @@ spring:
       properties:
         hibernate:
           format_sql: true
+
 server:
   port: 8085
+
+cloud:
+  aws:
+    s3:
+      bucket: suhabuckettest
+    credentials:
+      access-key:
+      secret-key:
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
 # port: 0
 
 eureka:
@@ -27,4 +41,4 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: ${eureka_uri:http://localhost:8761/eureka}
