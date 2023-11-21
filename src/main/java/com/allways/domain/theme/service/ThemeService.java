@@ -1,5 +1,7 @@
 package com.allways.domain.theme.service;
 
+import com.allways.common.feignClient.FastApiDataRequest;
+import com.allways.common.feignClient.FastApiFeignClient;
 import com.allways.domain.theme.entity.Theme;
 import com.allways.domain.theme.dto.ThemeCreateRequest;
 import com.allways.domain.theme.exception.ThemeNotFoundException;
@@ -15,6 +17,7 @@ import javax.transaction.Transactional;
 public class ThemeService {
 
     private final ThemeRepository themeRepository;
+    private final FastApiFeignClient fastApiFeignClient;
 
     @Transactional
     public void createTheme(ThemeCreateRequest req, Long userSeq){
@@ -28,9 +31,26 @@ public class ThemeService {
         Long nextOrder = themeRepository.findLastThemeOrderByUserSeq(userSeq);
         nextOrder += 1;
 
-        //테마 생성
-        themeRepository.save(new Theme(req.getThemeName(), nextOrder, userSeq));
+        Theme theme = new Theme(req.getThemeName(), nextOrder, userSeq);
 
+        System.out.println("11111111111");
+        System.out.println(theme);
+        System.out.println(theme.getThemeName());
+
+        //테마 생성
+        Theme newTheme = themeRepository.save(theme);
+
+        System.out.println("11222222");
+        System.out.println(newTheme);
+        System.out.println(newTheme.getThemeName());
+
+
+        FastApiDataRequest fastApiDataRequest = new FastApiDataRequest();
+        fastApiDataRequest.setThemeSeq(theme.getThemeSeq());
+        // 이미지 URL 생성 또는 가져오는 로직이 있다면 여기에 추가
+        fastApiDataRequest.setImageUrl(req.getImageUrl());
+
+        fastApiFeignClient.sendDataToFastApi(fastApiDataRequest);
     }
 
     @Transactional
