@@ -31,29 +31,7 @@ public class PostService {
 
     @Transactional
     public PostUpdateResponse updatePost(PostUpdateRequest req, Long postSeq) {
-        // update 내용 추가 바람!!!!
+        postRepository.updatePostByPostSeq(postSeq, req.getCategorySeq(), req.getPostTitle(), req.getPostContent());
         return new PostUpdateResponse(postSeq);
     }
-//
-//    @Transactional
-//    public PostUpdateResponse updatePost(Long postSeq, PostUpdateRequest req){
-//        Post post=postRepository.findById(postSeq).orElseThrow(PostNotFoundException::new);
-//        Post.ImageUpdatedResult result =post.update(req);
-//        uploadImages(result.getAddedImages(),result.getAddedImageFiles());
-//        deleteImages(result.getDeletedImages());
-//        return new PostUpdateResponse(postSeq);
-//    }
-//    private void uploadImages(List<Image> images, List<MultipartFile> fileImages){
-//        IntStream.range(0,images.size()).forEach(i->fileService.upload(fileImages.get(i),images.get(i).getUniqueName()));
-//    }
-//
-//    private void deleteImages(List<Image> images){
-//        images.stream().forEach(i->fileService.delete(i.getUniqueName()));
-//    }
-//
-//    public PostListDto readAll(PostReadCondition cond){
-//        return PostListDto.toDto(
-//                postRepository.findAllByCondition(cond)
-//        );
-//    }
 }

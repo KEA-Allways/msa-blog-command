@@ -35,7 +35,7 @@ public class PostCommandController {
     // 게시글 수정
     @PutMapping("/api/posts/{postSeq}")
     @ResponseStatus(HttpStatus.OK)
-    public Response updatePost(@ModelAttribute PostUpdateRequest req, @PathVariable Long postSeq){
+    public Response updatePost(@RequestBody PostUpdateRequest req, @PathVariable Long postSeq){
         return Response.success(postService.updatePost(req, postSeq));
     }
 

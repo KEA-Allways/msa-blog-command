@@ -15,17 +15,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostUpdateRequest {
-    @NotBlank(message = "{postUpdateRequest.title.notBlank}")
-    private String title;
+    private String postTitle;
 
-    @NotBlank(message = "{postUpdateRequest.content.notBlank}")
-    private String content;
+    private String postContent;
 
-    @NotNull(message = "{postUpdateRequest.price.notNull}")
-    @PositiveOrZero(message = "{postUpdateRequest.price.positiveOrZero}")
-    private Long price;
-
-    private List<MultipartFile> addedImages = new ArrayList<>();
-
-    private List<Long> deletedImages = new ArrayList<>();
+    private Long categorySeq;
 }
