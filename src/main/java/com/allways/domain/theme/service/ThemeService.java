@@ -1,5 +1,6 @@
 package com.allways.domain.theme.service;
 
+import com.allways.common.feign.theme.ThemeFeignService;
 import com.allways.common.feignClient.FastApiDataRequest;
 import com.allways.common.feignClient.FastApiFeignClient;
 import com.allways.domain.theme.entity.Theme;
@@ -17,6 +18,7 @@ import javax.transaction.Transactional;
 public class ThemeService {
 
     private final ThemeRepository themeRepository;
+    private final ThemeFeignService themeFeignService;
     private final FastApiFeignClient fastApiFeignClient;
 
     @Transactional
@@ -28,22 +30,12 @@ public class ThemeService {
 
         //테마 생성 시 가장 높은 themeOrder를 조회한 후 + 1
         //Feign으로 수정
-        Long nextOrder = themeRepository.findLastThemeOrderByUserSeq(userSeq);
-        nextOrder += 1;
+        Long nextOrder = themeFeignService.readThemeOrder(userSeq);
 
         Theme theme = new Theme(req.getThemeName(), nextOrder, userSeq);
 
-        System.out.println("11111111111");
-        System.out.println(theme);
-        System.out.println(theme.getThemeName());
-
         //테마 생성
         Theme newTheme = themeRepository.save(theme);
-
-        System.out.println("11222222");
-        System.out.println(newTheme);
-        System.out.println(newTheme.getThemeName());
-
 
         FastApiDataRequest fastApiDataRequest = new FastApiDataRequest();
         fastApiDataRequest.setThemeSeq(theme.getThemeSeq());
