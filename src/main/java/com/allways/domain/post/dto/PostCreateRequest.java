@@ -21,6 +21,10 @@ public class PostCreateRequest {
     @PositiveOrZero(message = "올바른 카테고리 아이디를 입력해주세요")
     private Long categorySeq;
 
+    //썸네일 이미지
+    private String imageUrl;
+
+
     // memberRepository 같은 경우 api 호출
     public static Post toEntity(PostCreateRequest req, Long userSeq){
         return new Post(
