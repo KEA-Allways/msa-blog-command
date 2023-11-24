@@ -1,13 +1,14 @@
 package com.allways.domain.theme.service;
 
+import com.allways.common.feign.fastApi.FastApiClientService;
 import com.allways.common.feign.theme.ThemeFeignService;
-import com.allways.common.feignClient.FastApiDataRequest;
-import com.allways.common.feignClient.FastApiFeignClient;
+import com.allways.common.feign.fastApi.FastApiFeignClient;
 import com.allways.domain.theme.entity.Theme;
 import com.allways.domain.theme.dto.ThemeCreateRequest;
 import com.allways.domain.theme.exception.ThemeNotFoundException;
 import com.allways.domain.theme.repository.ThemeRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -15,11 +16,12 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
+@Slf4j
 public class ThemeService {
 
     private final ThemeRepository themeRepository;
     private final ThemeFeignService themeFeignService;
-    private final FastApiFeignClient fastApiFeignClient;
+    private final FastApiClientService fastApiClientService;
 
     @Transactional
     public void createTheme(ThemeCreateRequest req, Long userSeq){
@@ -37,12 +39,12 @@ public class ThemeService {
         //테마 생성
         Theme newTheme = themeRepository.save(theme);
 
-        FastApiDataRequest fastApiDataRequest = new FastApiDataRequest();
-        fastApiDataRequest.setThemeSeq(theme.getThemeSeq());
-        // 이미지 URL 생성 또는 가져오는 로직이 있다면 여기에 추가
-        fastApiDataRequest.setImageUrl(req.getImageUrl());
 
-        fastApiFeignClient.sendDataToFastApi(fastApiDataRequest);
+        Long themeSeq= newTheme.getThemeSeq();
+        String imageUrl = req.getImageUrl();
+
+        fastApiClientService.sendDataToFastApiTheme(themeSeq,imageUrl);
+
     }
 
     @Transactional

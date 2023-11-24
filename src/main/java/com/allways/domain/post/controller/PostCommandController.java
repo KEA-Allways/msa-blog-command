@@ -16,9 +16,11 @@ public class PostCommandController {
     private final PostService postService;
 
     // 게시글 생성
+    //썸네일도 같이 생성
     @PostMapping("/api/post")
     @ResponseStatus(HttpStatus.CREATED)
     public Response createPost(@RequestHeader(value = "userSeq") Long userSeq, @RequestBody PostCreateRequest req) {
+
         return Response.success(postService.createPost(req, userSeq));
     }
 
