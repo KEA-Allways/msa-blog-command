@@ -23,7 +23,7 @@ public class PostService {
     @Transactional
     public PostCreateResponse createPost(PostCreateRequest req, Long userSeq){
         Post post = postRepository.save(PostCreateRequest.toEntity(req, userSeq));
-        fastApiClientService.sendDataToFastApiThumbnail(userSeq,req.getImageUrl());
+        fastApiClientService.sendDataToFastApiThumbnail(post.getPostSeq(),req.getImageUrl());
 
         return new PostCreateResponse(post.getPostSeq());
     }
