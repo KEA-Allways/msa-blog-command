@@ -34,11 +34,13 @@ public class ThemeService {
         //Feign으로 수정
         Long nextOrder = themeFeignService.readThemeOrder(userSeq);
 
+
         Theme theme = new Theme(req.getThemeName(), nextOrder, userSeq);
 
         //테마 생성
         Theme newTheme = themeRepository.save(theme);
 
+        //테마 seq 생김
 
         Long themeSeq= newTheme.getThemeSeq();
         String imageUrl = req.getImageUrl();
