@@ -26,7 +26,6 @@ public class CategoryService {
         categoryRepository.save(new Category(req.getCategoryName(), nextOrder, themeSeq));
     }
 
-    // delete는 repository에서 가져와서 삭제가 아니라 그냥 deleteById로 삭제가 가능함
     @Transactional
     public void deleteCategory(Long categorySeq){
         categoryRepository.deleteById(categorySeq);
