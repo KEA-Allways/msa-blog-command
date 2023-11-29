@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin(origins = "http://localhost:3000")
 public class TemplateCommandController {
 	private final TemplateCommandService templateCommandService;
 
@@ -22,7 +21,8 @@ public class TemplateCommandController {
 	@PostMapping("/api/template")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Response createTemplate(@RequestHeader(value = "userSeq") Long userSeq, @RequestBody TemplateCreateRequest req) {
-		return (Response.success(templateCommandService.createTemplate(req, userSeq)));
+		templateCommandService.createTemplate(req, userSeq);
+		return Response.success();
 	}
 
 	// 선택된 템플릿(서식) Seq에 해당하는 template 수정하기(update)
