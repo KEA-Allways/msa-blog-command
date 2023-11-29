@@ -4,9 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReplyCreateRequest {
+    @NotBlank(message = "댓글 내용을 작성해주세요.")
     private String replyContent;
 }

@@ -1,22 +1,13 @@
 package com.allways.domain.reply.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import com.allways.common.EntityDate;
-import com.allways.domain.post.entity.Post;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
+@Setter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Reply extends EntityDate  {
@@ -35,9 +26,9 @@ public class Reply extends EntityDate  {
 	private Long userSeq;
 
 
-	public Reply(String content, Long postSeq, Long UserSeq) {
+	public Reply(String content, Long postSeq, Long userSeq) {
 		this.replyContent = content;
 		this.postSeq = postSeq;
-		this.userSeq = UserSeq;
+		this.userSeq = userSeq;
 	}
 }
