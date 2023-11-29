@@ -1,6 +1,7 @@
 package com.allways.domain.post.dto;
 
 import com.allways.domain.post.entity.Post;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,14 +15,11 @@ import javax.validation.constraints.PositiveOrZero;
 public class PostCreateRequest {
     @NotBlank(message = "게시글 제목을 입력해주세요")
     private String postTitle;
-
     @NotBlank(message = "게시글 본문을 입력해주세요")
     private String postContent;
-
     @PositiveOrZero(message = "올바른 카테고리 아이디를 입력해주세요")
     private Long categorySeq;
-
-    //썸네일 이미지
+    @NotBlank(message = "썸네일 이미지를 생성해주세요.")
     private String imageUrl;
 
 
@@ -34,7 +32,6 @@ public class PostCreateRequest {
                 userSeq,
                 //게시글 생성에서 뽑아오는것
                 req.categorySeq
-
                 //req.images.stream().map(i->new Image(i.getOriginalFilename())).collect(toList())
         );
     }

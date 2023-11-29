@@ -28,7 +28,7 @@ class CategoryRepositoryTest {
     @Autowired private EntityManager entityManager;
 
     @AfterEach
-    void tearDown() {
+    void AfterEach() {
         categoryRepository.deleteAll();
     }
 

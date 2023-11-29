@@ -7,14 +7,19 @@ public class PostUpdateRequestFactory {
         return new PostUpdateRequest(
                 "newPostTitle",
                 "newPostContent",
-                1L);
+                1L,
+                "postImgUrl");
     }
 
     public static PostUpdateRequest createPostUpdateRequest(
             String newPostTitle,
             String newPostContent,
-            Long newCategorySeq) {
+            Long newCategorySeq,
+            String newPostImgUrl) {
         return new PostUpdateRequest(
-                newPostTitle, newPostContent, newCategorySeq);
+                newPostTitle,
+                newPostContent,
+                newCategorySeq,
+                newPostImgUrl);
     }
 }

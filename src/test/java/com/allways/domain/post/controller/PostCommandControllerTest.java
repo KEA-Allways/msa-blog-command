@@ -3,7 +3,7 @@ package com.allways.domain.post.controller;
 import com.allways.common.factory.post.PostCreateRequestFactory;
 import com.allways.common.factory.post.PostUpdateRequestFactory;
 import com.allways.domain.post.dto.PostUpdateRequest;
-import com.allways.domain.post.service.PostService;
+import com.allways.domain.post.service.PostCommandService;
 import com.allways.domain.post.dto.PostCreateRequest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 class PostCommandControllerTest {
     private MockMvc mockMvc;
-    @Mock private PostService postService;
+    @Mock private PostCommandService postCommandService;
     @InjectMocks private PostCommandController postCommandController;
 
     @BeforeEach
@@ -52,7 +52,7 @@ class PostCommandControllerTest {
         MockHttpServletRequest request = result.getRequest();
         String userSeq = request.getHeader("userSeq");
 
-        verify(postService).createPost(createRequest, Long.parseLong(userSeq));
+        verify(postCommandService).createPost(createRequest, Long.parseLong(userSeq));
     }
 
     @Test
@@ -66,19 +66,19 @@ class PostCommandControllerTest {
                         .content(asJsonString(updateRequest)))
                 .andExpect(status().isOk());
 
-        verify(postService).updatePost(updateRequest, postSeq);
+        verify(postCommandService).updatePost(updateRequest, postSeq);
     }
 
     @Test
     void deletePostTest() throws Exception {
         Long postSeq = 1L;
 
-        doNothing().when(postService).deletePost(postSeq);
+        doNothing().when(postCommandService).deletePost(postSeq);
 
         mockMvc.perform(delete("/api/post/{postSeq}", postSeq))
                 .andExpect(status().isOk());
 
-        verify(postService).deletePost(postSeq);
+        verify(postCommandService).deletePost(postSeq);
     }
 
     // Helper method to convert objects to JSON string

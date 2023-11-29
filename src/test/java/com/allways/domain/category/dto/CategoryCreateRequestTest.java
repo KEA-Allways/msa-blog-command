@@ -1,6 +1,7 @@
 package com.allways.domain.category.dto;
 
 import com.allways.common.factory.category.CategoryCreateRequestFactory;
+
 import org.junit.jupiter.api.Test;
 
 import javax.validation.Validation;
@@ -13,14 +14,13 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CategoryCreateRequestTest {
+    private final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+    private final Validator validator = factory.getValidator();
 
     @Test
     void CategoryCreateRequestValidateTest() {
         // Given
         CategoryCreateRequest categoryCreateRequest = CategoryCreateRequestFactory.createCategoryCreateRequest();
-
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
 
         // When
         Set<String> violations = validator.validate(categoryCreateRequest).stream()
@@ -33,12 +33,9 @@ public class CategoryCreateRequestTest {
     }
 
     @Test
-    void CategoryNameNotBlankTest() {
+    void CategoryNameBlankTest() {
         // Given
         CategoryCreateRequest categoryCreateRequest = CategoryCreateRequestFactory.createCategoryCreateRequest("");
-
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
 
         // When
         Set<String> violations = validator.validate(categoryCreateRequest).stream()
