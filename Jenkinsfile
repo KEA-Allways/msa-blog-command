@@ -103,12 +103,12 @@ pipeline {
             
                 sh 'ssh -o StrictHostKeyChecking=no ${username}@${ip} "whoami"'
 
-                sh "ssh -o StrictHostKeyChecking=no ${username}@${ip} 'docker stop ${springname}'"
-                sh "ssh -o StrictHostKeyChecking=no ${username}@${ip} 'docker rm ${springname}'"
-                sh "ssh -o StrictHostKeyChecking=no ${username}@${ip} 'docker rmi ${imagename}:${tagname}'"
+                sh 'xargs --no-run-if-empty docker stop ${springname}'
+                sh 'xargs --no-run-if-empty docker rm ${springname}'
+                sh 'xargs --no-run-if-empty docker ${imagename}:${tagname}'
 
                 sh "ssh -o StrictHostKeyChecking=no ${username}@${ip} 'docker pull ${imagename}:${tagname}'"
-                sh "ssh -o StrictHostKeyChecking=no ${username}@${ip} 'docker run -d -p 81:${port} -p ${port}:${port} --name ${springname} ${imagename}:${tagname}'"
+                sh "ssh -o StrictHostKeyChecking=no ${username}@${ip} 'docker run -d -p 80:${port} -p ${port}:${port} --name ${springname} ${imagename}:${tagname}'"
             }
           }
 
