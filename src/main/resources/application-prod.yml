@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: blog-command-service
+  datasource:
+    url: jdbc:mysql://3.80.230.96/command?allowPublicKeyRetrieval=true&useSSL=false
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root
+    password: 1234
+  jpa:
+    database: mysql
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      properties:
+        hibernate:
+          format_sql: true
+
+  # 로깅 설정
+  logging:
+    level:
+      org.hibernate.SQL: debug
+      org.hibernate.type: trace
+
+  # 서버 설정
+server:
+  port: 8085
+
+cloud:
+  aws:
+    s3:
+      bucket: suhabuckettest
+    credentials:
+      access-key:
+      secret-key:
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
+# port: 0
+
+eureka:
+  instance:
+#    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://54.87.40.18:8761/eureka
