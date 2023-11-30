@@ -33,7 +33,7 @@ public class PostCommandController {
     public Response updatePost(@PathVariable Long postSeq,
                                @RequestBody PostUpdateRequest req){
         postCommandService.updatePost(req, postSeq);
-        return Response.success();
+        return Response.success(postSeq);
     }
 
     //게시글 삭제
