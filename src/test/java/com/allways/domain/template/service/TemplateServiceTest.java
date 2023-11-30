@@ -19,9 +19,9 @@ import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-public class TemplateCommandServiceTest {
+public class TemplateServiceTest {
     @Mock private TemplateRepository templateRepository;
-    @InjectMocks private TemplateCommandService templateCommandService;
+    @InjectMocks private TemplateService templateService;
     @Captor private ArgumentCaptor<Template> TemplateArgumentCaptor;
 
     @Test
@@ -31,7 +31,7 @@ public class TemplateCommandServiceTest {
         Long userSeq = 1L;
 
         // When
-        templateCommandService.createTemplate(createRequest, userSeq);
+        templateService.createTemplate(createRequest, userSeq);
 
         // Then
         verify(templateRepository).save(TemplateArgumentCaptor.capture());
@@ -49,7 +49,7 @@ public class TemplateCommandServiceTest {
         TemplateUpdateRequest updateRequest = TemplateUpdateRequestFactory.createTemplateUpdateRequest();
 
         // When
-        templateCommandService.updateTemplate(updateRequest, templateSeq);
+        templateService.updateTemplate(updateRequest, templateSeq);
 
         // Then
         verify(templateRepository).updateBySeq(
@@ -65,7 +65,7 @@ public class TemplateCommandServiceTest {
         Long templateSeq = 1L;
 
         // When
-        templateCommandService.deleteTemplate(templateSeq);
+        templateService.deleteTemplate(templateSeq);
 
         // Then
         verify(templateRepository).deleteById(templateSeq);

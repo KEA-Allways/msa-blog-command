@@ -14,7 +14,7 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class ReplyCommandService {
+public class ReplyService {
 
     private final ReplyRepository replyRepository;
 

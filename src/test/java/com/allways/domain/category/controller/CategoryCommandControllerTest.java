@@ -4,7 +4,7 @@ import com.allways.common.factory.category.CategoryCreateRequestFactory;
 import com.allways.common.factory.category.CategoryUpdateRequestFactory;
 import com.allways.domain.category.dto.CategoryCreateRequest;
 import com.allways.domain.category.dto.CategoryUpdateRequest;
-import com.allways.domain.category.service.CategoryCommandService;
+import com.allways.domain.category.service.CategoryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(MockitoExtension.class)
 class CategoryCommandControllerTest {
-    @Mock private CategoryCommandService categoryCommandService;
+    @Mock private CategoryService categoryService;
     @InjectMocks private CategoryCommandController categoryCommandController;
     private MockMvc mockMvc;
 
@@ -46,7 +46,7 @@ class CategoryCommandControllerTest {
                         .content(asJsonString(createRequest)))
                 .andExpect(status().isCreated());
 
-        verify(categoryCommandService).createCategory(themeSeq, createRequest);
+        verify(categoryService).createCategory(themeSeq, createRequest);
     }
 
     @Test
@@ -62,7 +62,7 @@ class CategoryCommandControllerTest {
                         .content(asJsonString(updateRequest)))
                 .andExpect(status().isOk());
 
-        verify(categoryCommandService).updateCategory(updateRequest, categorySeq);
+        verify(categoryService).updateCategory(updateRequest, categorySeq);
     }
 
     @Test
@@ -75,7 +75,7 @@ class CategoryCommandControllerTest {
                         .contentType("application/json"))
                 .andExpect(status().isOk());
 
-        verify(categoryCommandService).deleteCategory(categorySeq);
+        verify(categoryService).deleteCategory(categorySeq);
     }
 
     private static String asJsonString(final Object obj) {

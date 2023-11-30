@@ -3,7 +3,7 @@ package com.allways.domain.category.controller;
 import com.allways.domain.category.dto.CategoryUpdateRequest;
 import com.allways.common.response.Response;
 import com.allways.domain.category.dto.CategoryCreateRequest;
-import com.allways.domain.category.service.CategoryCommandService;
+import com.allways.domain.category.service.CategoryService;
 
 import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
@@ -17,13 +17,13 @@ import static com.allways.common.response.Response.success;
 @RequiredArgsConstructor
 @Slf4j
 public class CategoryCommandController {
-    public final CategoryCommandService categoryCommandService;
+    public final CategoryService categoryService;
 
     @PostMapping("/api/theme/{themeSeq}/category")
     @ResponseStatus(HttpStatus.CREATED)
     public Response createCategory(@PathVariable Long themeSeq,
             @RequestBody CategoryCreateRequest req) {
-        categoryCommandService.createCategory(themeSeq, req);
+        categoryService.createCategory(themeSeq, req);
         return success();
     }
 
@@ -31,14 +31,14 @@ public class CategoryCommandController {
     @ResponseStatus(HttpStatus.OK)
     public Response updateCategory(@PathVariable Long categorySeq,
                                    @RequestBody CategoryUpdateRequest req){
-        categoryCommandService.updateCategory(req, categorySeq);
+        categoryService.updateCategory(req, categorySeq);
         return success();
     }
 
     @DeleteMapping("/api/category/{categorySeq}")
     @ResponseStatus(HttpStatus.OK)
     public Response deleteCategory(@PathVariable Long categorySeq){
-        categoryCommandService.deleteCategory(categorySeq);
+        categoryService.deleteCategory(categorySeq);
         return success();
     }
 }

@@ -12,7 +12,7 @@ import javax.transaction.Transactional;
 @RequiredArgsConstructor
 @Service
 @Transactional
-public class TemplateCommandService {
+public class TemplateService {
     private final TemplateRepository templateRepository;
 
     // template를 생성(create)

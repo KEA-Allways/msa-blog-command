@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class PostCommandService {
+public class PostService {
 
     private final PostRepository postRepository;
     private final FastApiClientService fastApiClientService;

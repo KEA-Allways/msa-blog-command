@@ -20,9 +20,9 @@ import static org.mockito.Mockito.verify;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ReplyCommandServiceTest {
+public class ReplyServiceTest {
     @Mock private ReplyRepository replyRepository;
-    @InjectMocks private ReplyCommandService replyCommandService;
+    @InjectMocks private ReplyService replyService;
     @Captor private ArgumentCaptor<Reply> ReplyArgumentCaptor;
 
     @Test
@@ -33,7 +33,7 @@ public class ReplyCommandServiceTest {
         Long userSeq = 1L;
 
         // When
-        replyCommandService.createReply(createRequest, postSeq, userSeq);
+        replyService.createReply(createRequest, postSeq, userSeq);
 
         // Then
         verify(replyRepository).save(ReplyArgumentCaptor.capture());
@@ -50,7 +50,7 @@ public class ReplyCommandServiceTest {
         ReplyUpdateRequest updateRequest = ReplyUpdateRequestFactory.createReplyUpdateRequest();
 
         // When
-        replyCommandService.updateReply(replySeq, updateRequest);
+        replyService.updateReply(replySeq, updateRequest);
 
         // Then
         verify(replyRepository).updateRepliesByReplySeq(
@@ -63,7 +63,7 @@ public class ReplyCommandServiceTest {
         Long replySeq = 1L;
 
         // When
-        replyCommandService.deleteReply(replySeq);
+        replyService.deleteReply(replySeq);
 
         // Then
         verify(replyRepository).deleteById(replySeq);

@@ -18,10 +18,10 @@ import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-class CategoryCommandServiceTest {
+class CategoryServiceTest {
     @Mock private CategoryRepository categoryRepository;
     @Mock private CategoryFeignService categoryFeignService;
-    @InjectMocks private CategoryCommandService categoryCommandService;
+    @InjectMocks private CategoryService categoryService;
     @Captor private ArgumentCaptor<Category> categoryArgumentCaptor;
 
     @Test
@@ -35,7 +35,7 @@ class CategoryCommandServiceTest {
         // When
         when(categoryFeignService.readCategoryOrder(themeSeq)).thenReturn(nextOrder);
 
-        categoryCommandService.createCategory(themeSeq, createRequest);
+        categoryService.createCategory(themeSeq, createRequest);
 
         // Then
         verify(categoryFeignService).readCategoryOrder(themeSeq);
@@ -55,7 +55,7 @@ class CategoryCommandServiceTest {
         Long categorySeq = 1L;
 
         // When
-        categoryCommandService.deleteCategory(categorySeq);
+        categoryService.deleteCategory(categorySeq);
 
         // Then
         verify(categoryRepository).deleteById(categorySeq);
