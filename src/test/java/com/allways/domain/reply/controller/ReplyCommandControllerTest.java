@@ -30,7 +30,7 @@ class ReplyCommandControllerTest {
     private MockMvc mockMvc;
 
     @BeforeEach
-    void setUp() {
+    void beforeEach() {
         mockMvc = MockMvcBuilders.standaloneSetup(replyCommandController).build();
     }
 
