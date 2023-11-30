@@ -4,7 +4,7 @@ import com.allways.common.factory.reply.ReplyCreateRequestFactory;
 import com.allways.common.factory.reply.ReplyUpdateRequestFactory;
 import com.allways.domain.reply.dto.ReplyCreateRequest;
 import com.allways.domain.reply.dto.ReplyUpdateRequest;
-import com.allways.domain.reply.service.ReplyCommandService;
+import com.allways.domain.reply.service.ReplyService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(MockitoExtension.class)
 class ReplyCommandControllerTest {
-    @Mock private ReplyCommandService replyCommandService;
+    @Mock private ReplyService replyService;
     @InjectMocks private ReplyCommandController replyCommandController;
     private MockMvc mockMvc;
 
@@ -54,7 +54,7 @@ class ReplyCommandControllerTest {
 
         // Verify
         // replyService가 createReply를 수행하는지 확인
-        verify(replyCommandService).createReply(createRequest, postSeq, Long.parseLong(userSeq));
+        verify(replyService).createReply(createRequest, postSeq, Long.parseLong(userSeq));
     }
 
     @Test
@@ -71,7 +71,7 @@ class ReplyCommandControllerTest {
 
         // Verify
         // replyService가 updateReply를 수행하는지 확인
-        verify(replyCommandService).updateReply(replySeq, updateRequest);
+        verify(replyService).updateReply(replySeq, updateRequest);
     }
 
     @Test
@@ -84,7 +84,7 @@ class ReplyCommandControllerTest {
 
         // Verify
         // replyService가 deleteReply를 수행하는지 확인
-        verify(replyCommandService).deleteReply(replySeq);
+        verify(replyService).deleteReply(replySeq);
     }
 
     // Utility method to convert object to JSON string

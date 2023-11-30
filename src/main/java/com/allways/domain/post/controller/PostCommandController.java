@@ -3,7 +3,7 @@ package com.allways.domain.post.controller;
 import com.allways.common.response.Response;
 import com.allways.domain.post.dto.PostCreateRequest;
 import com.allways.domain.post.dto.PostUpdateRequest;
-import com.allways.domain.post.service.PostCommandService;
+import com.allways.domain.post.service.PostService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 @Slf4j
 public class PostCommandController {
-    private final PostCommandService postCommandService;
+    private final PostService postService;
 
     // 게시글 생성
     // 썸네일도 같이 생성
@@ -23,7 +23,7 @@ public class PostCommandController {
     @ResponseStatus(HttpStatus.CREATED)
     public Response createPost(@RequestHeader(value = "userSeq") Long userSeq,
                                @RequestBody PostCreateRequest req) {
-        postCommandService.createPost(req, userSeq);
+        postService.createPost(req, userSeq);
         return Response.success();
     }
 
@@ -32,7 +32,7 @@ public class PostCommandController {
     @ResponseStatus(HttpStatus.OK)
     public Response updatePost(@PathVariable Long postSeq,
                                @RequestBody PostUpdateRequest req){
-        postCommandService.updatePost(req, postSeq);
+        postService.updatePost(req, postSeq);
         return Response.success();
     }
 
@@ -40,7 +40,7 @@ public class PostCommandController {
     @DeleteMapping("/api/post/{postSeq}")
     @ResponseStatus(HttpStatus.OK)
     public Response deletePost(@PathVariable Long postSeq) {
-        postCommandService.deletePost(postSeq);
+        postService.deletePost(postSeq);
         return Response.success();
     }
 }

@@ -3,7 +3,7 @@ package com.allways.domain.post.controller;
 import com.allways.common.factory.post.PostCreateRequestFactory;
 import com.allways.common.factory.post.PostUpdateRequestFactory;
 import com.allways.domain.post.dto.PostUpdateRequest;
-import com.allways.domain.post.service.PostCommandService;
+import com.allways.domain.post.service.PostService;
 import com.allways.domain.post.dto.PostCreateRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 class PostCommandControllerTest {
     private MockMvc mockMvc;
-    @Mock private PostCommandService postCommandService;
+    @Mock private PostService postService;
     @InjectMocks private PostCommandController postCommandController;
 
     @BeforeEach
@@ -51,7 +51,7 @@ class PostCommandControllerTest {
         MockHttpServletRequest request = result.getRequest();
         String userSeq = request.getHeader("userSeq");
 
-        verify(postCommandService).createPost(createRequest, Long.parseLong(userSeq));
+        verify(postService).createPost(createRequest, Long.parseLong(userSeq));
     }
 
     @Test
@@ -66,7 +66,7 @@ class PostCommandControllerTest {
                         .content(asJsonString(updateRequest)))
                 .andExpect(status().isOk());
 
-        verify(postCommandService).updatePost(updateRequest, postSeq);
+        verify(postService).updatePost(updateRequest, postSeq);
     }
 
     @Test
@@ -75,13 +75,13 @@ class PostCommandControllerTest {
         Long postSeq = 1L;
 
         // When
-        doNothing().when(postCommandService).deletePost(postSeq);
+        doNothing().when(postService).deletePost(postSeq);
 
         // Then
         mockMvc.perform(delete("/api/post/{postSeq}", postSeq))
                 .andExpect(status().isOk());
 
-        verify(postCommandService).deletePost(postSeq);
+        verify(postService).deletePost(postSeq);
     }
 
     // Helper method to convert objects to JSON string
