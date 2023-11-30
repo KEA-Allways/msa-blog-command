@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name="user-query-service" )
 public interface UserFeignClient {
 
-    @GetMapping("{userSeq}")
+    @GetMapping("/api/users/feign/{userSeq}")
     UserFeignResponse queryUser(@PathVariable Long userSeq);
 
 }
