@@ -17,13 +17,13 @@ public class FastApiClientService {
         FastApiThemeDataRequest request = new FastApiThemeDataRequest();
         request.setThemeSeq(themeSeq);
         request.setImageUrl(imageUrl);
-        fastApiFeignClient.sendDataToFastApiTheme(request);
+        fastApiFeignClient.saveThemeToFastApi(request);
     }
     public void sendDataToFastApiThumbnail(Long postSeq,String imageUrl){
         FastApiThumbnailDataRequest request = new FastApiThumbnailDataRequest();
         request.setPostSeq(postSeq);
         request.setImageUrl(imageUrl);
-        fastApiFeignClient.sendDateToFastApiThumbnail(request);
+        fastApiFeignClient.saveThumbnailToFastApi(request);
 
     }
 }

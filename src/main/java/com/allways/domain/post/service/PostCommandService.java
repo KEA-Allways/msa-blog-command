@@ -22,9 +22,7 @@ public class PostCommandService {
     @Transactional
     public void createPost(PostCreateRequest req, Long userSeq) {
         Post post = postRepository.save(PostCreateRequest.toEntity(req, userSeq));
-        fastApiClientService.sendDataToFastApiThumbnail(
-                post.getPostSeq(),
-                req.getImageUrl());
+        fastApiClientService.sendDataToFastApiThumbnail(post.getPostSeq(), req.getImageUrl());
     }
 
     @Transactional
