@@ -53,3 +53,4 @@ eureka:
 env :
   category-feign-url :  "http://localhost:8086/api/category/feign"
   theme-feign-url :  "http://localhost:8086/api/theme/feign"
+  user-feign-url :  "http://localhost:8084/api/users/feign"

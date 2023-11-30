@@ -52,3 +52,5 @@ eureka:
 env :
   category-feign-url : "http://54.147.162.65:8086/api/category/feign"
   theme-feign-url :  "http://54.147.162.65:8086/api/theme/feign"
+  user-feign-url :  "http://54.147.162.65:8086/api/theme/feign"
+  file-feign-url :  "11"
