@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
-@FeignClient(name = "fastApi", url = "${env.file-feign-url}")
+@FeignClient(name = "fastApi", url = "${env.file-command-feign-url}")
 public interface FastApiFeignClient {
     @PostMapping(value = "/api/feign/theme" )
     @ResponseStatus(HttpStatus.CREATED)
