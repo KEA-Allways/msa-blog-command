@@ -1,5 +1,6 @@
 package com.allways.domain.category.controller;
 
+import com.allways.domain.category.dto.CategoryUpdateRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +10,8 @@ import com.allways.domain.category.dto.CategoryCreateRequest;
 import com.allways.domain.category.service.CategoryCommandService;
 
 import lombok.RequiredArgsConstructor;
+
+import javax.ws.rs.Path;
 
 import static com.allways.common.response.Response.success;
 
@@ -23,6 +26,14 @@ public class CategoryCommandController {
     public Response createCategory(@PathVariable Long themeSeq,
             @RequestBody CategoryCreateRequest req) {
         categoryCommandService.createCategory(themeSeq, req);
+        return success();
+    }
+
+    @PutMapping("/api/category/{categorySeq}")
+    @ResponseStatus(HttpStatus.OK)
+    public Response updateCategory(@PathVariable Long categorySeq,
+                                   @RequestBody CategoryUpdateRequest req){
+        categoryCommandService.updateCategory(req, categorySeq);
         return success();
     }
 

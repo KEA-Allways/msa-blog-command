@@ -1,6 +1,7 @@
 package com.allways.domain.category.service;
 
 import com.allways.common.feign.category.CategoryFeignService;
+import com.allways.domain.category.dto.CategoryUpdateRequest;
 import com.allways.domain.category.entity.Category;
 import com.allways.domain.category.dto.CategoryCreateRequest;
 import com.allways.domain.category.repository.CategoryRepository;
@@ -21,6 +22,14 @@ public class CategoryCommandService {
     public void createCategory(Long themeSeq, CategoryCreateRequest req){
         Long nextOrder = categoryFeignService.readCategoryOrder(themeSeq);
         categoryRepository.save(new Category(req.getCategoryName(), nextOrder, themeSeq));
+    }
+
+    @Transactional
+    public void updateCategory(CategoryUpdateRequest req, Long categorySeq){
+        categoryRepository.updateCategoryByCategorySeq(
+                categorySeq,
+                req.getCategoryName()
+        );
     }
 
     @Transactional
