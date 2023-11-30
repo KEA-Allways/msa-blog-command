@@ -4,13 +4,14 @@ import com.allways.domain.reply.dto.ReplyCreateRequest;
 import com.allways.domain.reply.dto.ReplyUpdateRequest;
 import com.allways.domain.reply.service.ReplyService;
 import com.allways.common.response.Response;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000")
 public class ReplyCommandController {
     private final ReplyService replyService;
 

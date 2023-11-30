@@ -4,7 +4,9 @@ import com.allways.domain.reply.dto.ReplyUpdateRequest;
 import com.allways.domain.reply.repository.ReplyRepository;
 import com.allways.domain.reply.entity.Reply;
 import com.allways.domain.reply.dto.ReplyCreateRequest;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -26,6 +28,7 @@ public class ReplyService {
     public void updateReply(Long replySeq, ReplyUpdateRequest req){
         replyRepository.updateRepliesByReplySeq(replySeq, req.getReplyContent());
     }
+
     @Transactional
     public void deleteReply(Long replySeq) {
         replyRepository.deleteById(replySeq);

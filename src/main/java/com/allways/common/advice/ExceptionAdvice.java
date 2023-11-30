@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 @Slf4j
 public class ExceptionAdvice {
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public Response exception(Exception e) {
-        //구체적인 에러 보여주기
-        log.info("e= {}",e.getMessage());
-        return Response.failure(-1000,"오류가 발생하였습니다.");
-
-    }
+//    @ExceptionHandler(Exception.class)
+//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+//    public Response exception(Exception e) {
+//        //구체적인 에러 보여주기
+//        log.info("e= {}",e.getMessage());
+//        return Response.failure(-1000,"오류가 발생하였습니다.");
+//
+//    }
     //401 에러
 }

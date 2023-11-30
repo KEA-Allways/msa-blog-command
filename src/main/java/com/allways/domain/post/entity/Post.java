@@ -9,10 +9,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -42,11 +44,11 @@ public class Post extends EntityDate {
 	//	@OneToMany(mappedBy = "post",orphanRemoval = true)
 	//	private List<Image> images; //3
 
-	public Post(String postTitle, String postContent, Long userSeq,Long categorySeq) {
+	public Post(String postTitle, String postContent, Long userSeq, Long categorySeq) {
 		this.postTitle = postTitle;
 		this.postContent = postContent;
 		this.userSeq = userSeq;
-		this.postView =0L;
+		this.postView = 0L;
 		this.categorySeq = categorySeq;
 	}
 }
