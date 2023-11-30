@@ -4,7 +4,7 @@ import com.allways.common.factory.template.TemplateCreateRequestFactory;
 import com.allways.common.factory.template.TemplateUpdateRequestFactory;
 import com.allways.domain.template.dto.TemplateCreateRequest;
 import com.allways.domain.template.dto.TemplateUpdateRequest;
-import com.allways.domain.template.service.TemplateCommandService;
+import com.allways.domain.template.service.TemplateService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 class TemplateCommandControllerTest {
     private MockMvc mockMvc;
-    @Mock private TemplateCommandService templateCommandService;
+    @Mock private TemplateService templateService;
     @InjectMocks private TemplateCommandController templateCommandController;
 
     @BeforeEach
@@ -51,7 +51,7 @@ class TemplateCommandControllerTest {
         MockHttpServletRequest request = result.getRequest();
         String userSeq = request.getHeader("userSeq");
 
-        verify(templateCommandService).createTemplate(createRequest, Long.parseLong(userSeq));
+        verify(templateService).createTemplate(createRequest, Long.parseLong(userSeq));
     }
 
     @Test
@@ -66,7 +66,7 @@ class TemplateCommandControllerTest {
                         .content(asJsonString(updateRequest)))
                 .andExpect(status().isOk());
 
-        verify(templateCommandService).updateTemplate(updateRequest, templateSeq);
+        verify(templateService).updateTemplate(updateRequest, templateSeq);
     }
 
     @Test
@@ -78,7 +78,7 @@ class TemplateCommandControllerTest {
         mockMvc.perform(delete("/api/template/{templateSeq}", templateSeq))
                 .andExpect(status().isOk());
 
-        verify(templateCommandService).deleteTemplate(templateSeq);
+        verify(templateService).deleteTemplate(templateSeq);
     }
 
     // 객체를 JSON 문자열로 변환하는 유틸리티 메서드

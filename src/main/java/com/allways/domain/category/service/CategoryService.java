@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Service
 @Transactional
-public class CategoryCommandService {
+public class CategoryService {
     private final CategoryRepository categoryRepository;
     private final CategoryFeignService categoryFeignService;
 

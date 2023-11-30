@@ -19,9 +19,9 @@ import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-public class PostCommandServiceTest {
+public class PostServiceTest {
     @Mock private PostRepository postRepository;
-    @InjectMocks private PostCommandService postCommandService;
+    @InjectMocks private PostService postService;
     @Captor private ArgumentCaptor<Post> postArgumentCaptor;
 
     @Test
@@ -33,7 +33,7 @@ public class PostCommandServiceTest {
 
         // When
         // 원래 쓰던 createPost는 feign을 쓰는 부분이 있어서 따로 테스트 용 코드 만들어줬음
-        postCommandService.createPostForTest(createRequest, userSeq);
+        postService.createPostForTest(createRequest, userSeq);
 
         // Then
         verify(postRepository).save(postArgumentCaptor.capture());
@@ -53,7 +53,7 @@ public class PostCommandServiceTest {
                 .createPostUpdateRequest();
 
         // When
-        postCommandService.updatePost(updateRequest, postSeq);
+        postService.updatePost(updateRequest, postSeq);
 
         // Then
         // postRepository의 updatePostByPostSeq 메서드가 호출되었는지 확인
@@ -71,7 +71,7 @@ public class PostCommandServiceTest {
         Long postSeq = 1L;
 
         // When
-        postCommandService.deletePost(postSeq);
+        postService.deletePost(postSeq);
 
         // Then
         // postRepository의 deleteById 메서드가 호출되었는지 확인
