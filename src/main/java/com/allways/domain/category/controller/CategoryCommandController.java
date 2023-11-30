@@ -1,17 +1,15 @@
 package com.allways.domain.category.controller;
 
 import com.allways.domain.category.dto.CategoryUpdateRequest;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-
 import com.allways.common.response.Response;
 import com.allways.domain.category.dto.CategoryCreateRequest;
 import com.allways.domain.category.service.CategoryCommandService;
 
+import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
 
-import javax.ws.rs.Path;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import static com.allways.common.response.Response.success;
 

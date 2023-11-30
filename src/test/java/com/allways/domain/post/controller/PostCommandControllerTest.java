@@ -5,17 +5,14 @@ import com.allways.common.factory.post.PostUpdateRequestFactory;
 import com.allways.domain.post.dto.PostUpdateRequest;
 import com.allways.domain.post.service.PostCommandService;
 import com.allways.domain.post.dto.PostCreateRequest;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -34,14 +31,16 @@ class PostCommandControllerTest {
     @InjectMocks private PostCommandController postCommandController;
 
     @BeforeEach
-    void setUp() {
+    void beforeEach() {
         mockMvc = MockMvcBuilders.standaloneSetup(postCommandController).build();
     }
 
     @Test
     void createPostTest() throws Exception {
+        // Given
         PostCreateRequest createRequest = PostCreateRequestFactory.createPostCreateRequest();
 
+        // When, Then
         MvcResult result = mockMvc.perform(post("/api/post")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("userSeq", String.valueOf(1L))
@@ -57,10 +56,11 @@ class PostCommandControllerTest {
 
     @Test
     void updatePostTest() throws Exception {
+        // Given
+        Long postSeq = 1L;
         PostUpdateRequest updateRequest = PostUpdateRequestFactory.createPostUpdateRequest();
 
-        Long postSeq = 1L;
-
+        // When, Then
         mockMvc.perform(put("/api/post/{postSeq}", postSeq)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(updateRequest)))
@@ -71,10 +71,13 @@ class PostCommandControllerTest {
 
     @Test
     void deletePostTest() throws Exception {
+        // Given
         Long postSeq = 1L;
 
+        // When
         doNothing().when(postCommandService).deletePost(postSeq);
 
+        // Then
         mockMvc.perform(delete("/api/post/{postSeq}", postSeq))
                 .andExpect(status().isOk());
 

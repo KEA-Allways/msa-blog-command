@@ -6,7 +6,6 @@ import com.allways.domain.post.dto.PostUpdateRequest;
 import com.allways.domain.post.entity.Post;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -66,11 +65,14 @@ public class PostRepositoryTest {
                 postSeq,
                 updateRequest.getCategorySeq(),
                 updateRequest.getPostTitle(),
-                updateRequest.getPostContent());
+                updateRequest.getPostContent()
+        );
+
+        Post updatedPost = postRepository.getById(postSeq);
 
         // Then
-        assertEquals(updateRequest.getCategorySeq(), postRepository.getById(postSeq).getCategorySeq());
-        assertEquals(updateRequest.getPostTitle(), postRepository.getById(postSeq).getPostTitle());
-        assertEquals(updateRequest.getPostContent(), postRepository.getById(postSeq).getPostContent());
+        assertEquals(updateRequest.getCategorySeq(), updatedPost.getCategorySeq());
+        assertEquals(updateRequest.getPostTitle(), updatedPost.getPostTitle());
+        assertEquals(updateRequest.getPostContent(), updatedPost.getPostContent());
     }
 }

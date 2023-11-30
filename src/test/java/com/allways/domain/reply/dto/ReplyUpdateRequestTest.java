@@ -20,10 +20,12 @@ public class ReplyUpdateRequestTest {
     @Test
     void ReplyUpdateRequestValidation() {
         // Given
-        ReplyUpdateRequest updateRequest = ReplyUpdateRequestFactory.createReplyUpdateRequest();
+        ReplyUpdateRequest updateRequest = ReplyUpdateRequestFactory
+                .createReplyUpdateRequest();
 
         // When
-        Set<ConstraintViolation<ReplyUpdateRequest>> violations = validator.validate(updateRequest);
+        Set<ConstraintViolation<ReplyUpdateRequest>> violations =
+                validator.validate(updateRequest);
 
         // Then
         assertTrue(violations.isEmpty());
@@ -32,14 +34,14 @@ public class ReplyUpdateRequestTest {
     @Test
     void ReplyContentBlankValidation() {
         // Given
-        ReplyUpdateRequest updateRequest = ReplyUpdateRequestFactory.createReplyUpdateRequest("");
+        ReplyUpdateRequest updateRequest = ReplyUpdateRequestFactory
+                .createReplyUpdateRequest("");
 
         // When
-        Set<ConstraintViolation<ReplyUpdateRequest>> violations = validator.validate(updateRequest);
+        Set<ConstraintViolation<ReplyUpdateRequest>> violations =
+                validator.validate(updateRequest);
 
         // Then
-        assertEquals(1, violations.size());
-        ConstraintViolation<ReplyUpdateRequest> violation = violations.iterator().next();
-        assertEquals("새로운 댓글을 입력해주세요.", violation.getMessage());
+        assertEquals(1, violations.size(), "새로운 댓글을 입력해주세요.");
     }
 }

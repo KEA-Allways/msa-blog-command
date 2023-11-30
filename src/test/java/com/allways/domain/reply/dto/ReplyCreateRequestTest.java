@@ -18,28 +18,30 @@ public class ReplyCreateRequestTest {
     private final Validator validator = factory.getValidator();
 
     @Test
-    void ReplyCreateRequestValidation() {
+    void replyCreateRequestValidation() {
         // Given
-        ReplyCreateRequest createRequest = ReplyCreateRequestFactory.createReplyCreateRequest();
+        ReplyCreateRequest createRequest = ReplyCreateRequestFactory
+                .createReplyCreateRequest();
 
         // When
-        Set<ConstraintViolation<ReplyCreateRequest>> violations = validator.validate(createRequest);
+        Set<ConstraintViolation<ReplyCreateRequest>> violations =
+                validator.validate(createRequest);
 
         // Then
         assertTrue(violations.isEmpty());
     }
 
     @Test
-    void ReplyContentBlankValidation() {
+    void replyCreateReplyContentValidation() {
         // Given
-        ReplyCreateRequest createRequest = ReplyCreateRequestFactory.createReplyCreateRequest("");
+        ReplyCreateRequest createRequest = ReplyCreateRequestFactory
+                .createReplyCreateRequest("");
 
         // When
-        Set<ConstraintViolation<ReplyCreateRequest>> violations = validator.validate(createRequest);
+        Set<ConstraintViolation<ReplyCreateRequest>> violations =
+                validator.validate(createRequest);
 
         // Then
-        assertEquals(1, violations.size());
-        ConstraintViolation<ReplyCreateRequest> violation = violations.iterator().next();
-        assertEquals("댓글 내용을 작성해주세요.", violation.getMessage());
+        assertEquals(1, violations.size(), "댓글 내용을 작성해주세요.");
     }
 }

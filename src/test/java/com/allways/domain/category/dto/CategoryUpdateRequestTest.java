@@ -1,6 +1,6 @@
 package com.allways.domain.category.dto;
 
-import com.allways.common.factory.category.CategoryCreateRequestFactory;
+import com.allways.common.factory.category.CategoryUpdateRequestFactory;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,19 +13,19 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CategoryCreateRequestTest {
+public class CategoryUpdateRequestTest {
     private final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     private final Validator validator = factory.getValidator();
 
     @Test
-    void categoryCreateRequestValidation() {
+    void categoryUpdateRequestValidation() {
         // Given
-        CategoryCreateRequest createRequest = CategoryCreateRequestFactory
-                .createCategoryCreateRequest();
+        CategoryUpdateRequest updateRequest = CategoryUpdateRequestFactory
+                .createCategoryUpdateRequest();
 
         // When
-        Set<ConstraintViolation<CategoryCreateRequest>> violations =
-                validator.validate(createRequest);
+        Set<ConstraintViolation<CategoryUpdateRequest>> violations =
+                validator.validate(updateRequest);
 
         // Then
         assertEquals(0, violations.size(),
@@ -35,12 +35,15 @@ public class CategoryCreateRequestTest {
     @Test
     void categoryCreateCategoryNameValidation() {
         // Given
-        CategoryCreateRequest createRequest = CategoryCreateRequestFactory
-                .createCategoryCreateRequest("", 1L, 1L);
+        CategoryUpdateRequest updateRequest = CategoryUpdateRequestFactory
+                .createCategoryUpdateRequest(
+                        "",
+                        1L,
+                        1L);
 
         // When
-        Set<ConstraintViolation<CategoryCreateRequest>> violations =
-                validator.validate(createRequest);
+        Set<ConstraintViolation<CategoryUpdateRequest>> violations =
+                validator.validate(updateRequest);
 
         // Then
         assertEquals(1, violations.size(),
@@ -50,15 +53,15 @@ public class CategoryCreateRequestTest {
     @Test
     void categoryCreateCategoryOrderValidation() {
         // Given
-        CategoryCreateRequest createRequest = CategoryCreateRequestFactory
-                .createCategoryCreateRequest(
-                        "categoryName",
+        CategoryUpdateRequest updateRequest = CategoryUpdateRequestFactory
+                .createCategoryUpdateRequest(
+                        "newCategoryName",
                         null,
                         1L);
 
         // When
-        Set<ConstraintViolation<CategoryCreateRequest>> violations =
-                validator.validate(createRequest);
+        Set<ConstraintViolation<CategoryUpdateRequest>> violations =
+                validator.validate(updateRequest);
 
         // Then
         assertEquals(1, violations.size(),
@@ -68,15 +71,15 @@ public class CategoryCreateRequestTest {
     @Test
     void categoryCreateThemeSeqValidation() {
         // Given
-        CategoryCreateRequest createRequest = CategoryCreateRequestFactory
-                .createCategoryCreateRequest(
-                        "categoryName",
+        CategoryUpdateRequest updateRequest = CategoryUpdateRequestFactory
+                .createCategoryUpdateRequest(
+                        "newCategoryName",
                         1L,
                         null);
 
         // When
-        Set<ConstraintViolation<CategoryCreateRequest>> violations =
-                validator.validate(createRequest);
+        Set<ConstraintViolation<CategoryUpdateRequest>> violations =
+                validator.validate(updateRequest);
 
         // Then
         assertEquals(1, violations.size(),

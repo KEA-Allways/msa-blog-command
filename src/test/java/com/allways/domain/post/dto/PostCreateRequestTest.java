@@ -5,12 +5,12 @@ import com.allways.domain.post.entity.Post;
 
 import org.junit.jupiter.api.Test;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,79 +19,79 @@ public class PostCreateRequestTest {
     private final Validator validator = factory.getValidator();
 
     @Test
-    void PostCreateRequestValidateTest() {
+    void postCreateRequestValidation() {
         // Given
-        PostCreateRequest createRequest = PostCreateRequestFactory.createPostCreateRequest();
+        PostCreateRequest createRequest = PostCreateRequestFactory
+                .createPostCreateRequest();
 
         // When
-        Set<String> violations = validator.validate(createRequest).stream()
-                .map(violation -> violation.getPropertyPath() + " " + violation.getMessage())
-                .collect(Collectors.toSet());
+        Set<ConstraintViolation<PostCreateRequest>> violations =
+                validator.validate(createRequest);
 
         // Then
-        assertEquals(0, violations.size(), "이 내용은 validation 검사를 통과 해야 합니다.");
+        assertEquals(0, violations.size(),
+                "위반 사항이 없습니다.");
     }
 
     @Test
-    void PostTitleBlankTest() {
+    void postCreatePostTitleValidation() {
         // Given
-        PostCreateRequest createRequest = PostCreateRequestFactory.createPostCreateRequest(
-                "",
-                "postContent",
-                1L,
-                "postImgUrl"
-        );
+        PostCreateRequest createRequest = PostCreateRequestFactory
+                .createPostCreateRequest(
+                        "",
+                        "postContent",
+                        1L,
+                        "postImgUrl");
 
         // When
-        Set<String> violations = validator.validate(createRequest).stream()
-                .map(violation -> violation.getPropertyPath() + " " + violation.getMessage())
-                .collect(Collectors.toSet());
+        Set<ConstraintViolation<PostCreateRequest>> violations =
+                validator.validate(createRequest);
 
         // Then
-        assertFalse(violations.isEmpty(), "위반 사항이 존재합니다.");
-        assertEquals(1, violations.size(), "PostTitle은 Blank가 아니어야합니다.");
+        assertEquals(1, violations.size(),
+                "PostTitle이 Blank 입니다.");
     }
 
     @Test
-    void PostContentBlankTest() {
+    void postCreatePostContentValidation() {
         // Given
-        PostCreateRequest createRequest = PostCreateRequestFactory.createPostCreateRequest(
-                "postTitle",
-                "",
-                1L,
-                "postImgUrl");
+        PostCreateRequest createRequest = PostCreateRequestFactory
+                .createPostCreateRequest(
+                        "postTitle",
+                        "",
+                        1L,
+                        "postImgUrl");
 
         // When
-        Set<String> violations = validator.validate(createRequest).stream()
-                .map(violation -> violation.getPropertyPath() + " " + violation.getMessage())
-                .collect(Collectors.toSet());
+        Set<ConstraintViolation<PostCreateRequest>> violations =
+                validator.validate(createRequest);
 
         // Then
-        assertFalse(violations.isEmpty(), "위반 사항이 존재합니다.");
-        assertEquals(1, violations.size(), "PostContent는 Blank가 아니어야합니다.");
+        assertEquals(1, violations.size(),
+                "PostContent가 Blank 입니다.");
     }
 
     @Test
-    void NegativeCategorySeqTest() {
+    void postCreateCategorySeqValidation() {
         // Given
-        PostCreateRequest createRequest = PostCreateRequestFactory.createPostCreateRequest(
-                "postTitle",
-                "postContent",
-                -1L,
-                "postImgUrl");
+        PostCreateRequest createRequest = PostCreateRequestFactory
+                .createPostCreateRequest(
+                        "postTitle",
+                        "postContent",
+                        -1L,
+                        "postImgUrl");
 
         // When
-        Set<String> violations = validator.validate(createRequest).stream()
-                .map(violation -> violation.getPropertyPath() + " " + violation.getMessage())
-                .collect(Collectors.toSet());
+        Set<ConstraintViolation<PostCreateRequest>> violations =
+                validator.validate(createRequest);
 
         // Then
-        assertFalse(violations.isEmpty(), "위반 사항이 존재합니다.");
-        assertEquals(1, violations.size(), "CategorySeq는 음수가 아니어야합니다.");
+        assertEquals(1, violations.size(),
+                "CategorySeq가 음수가 입니다.");
     }
 
     @Test
-    void PostImgUrlBlankTest() {
+    void postCreatePostImgUrlValidation() {
         // Given
         PostCreateRequest createRequest = PostCreateRequestFactory.createPostCreateRequest(
                 "postTitle",
@@ -100,13 +100,12 @@ public class PostCreateRequestTest {
                 "");
 
         // When
-        Set<String> violations = validator.validate(createRequest).stream()
-                .map(violation -> violation.getPropertyPath() + " " + violation.getMessage())
-                .collect(Collectors.toSet());
+        Set<ConstraintViolation<PostCreateRequest>> violations =
+                validator.validate(createRequest);
 
         // Then
-        assertFalse(violations.isEmpty(), "위반 사항이 존재합니다.");
-        assertEquals(1, violations.size(), "PostImgUrl은 Blank가 아니어야합니다.");
+        assertEquals(1, violations.size(),
+                "PostImgUrl이 Blank 입니다.");
     }
 
     @Test
@@ -120,9 +119,9 @@ public class PostCreateRequestTest {
 
         // Then
         assertNotNull(post);
+        assertEquals(userSeq, post.getUserSeq());
         assertEquals(request.getPostTitle(), post.getPostTitle());
         assertEquals(request.getPostContent(), post.getPostContent());
-        assertEquals(userSeq, post.getUserSeq());
         assertEquals(request.getCategorySeq(), post.getCategorySeq());
     }
 }

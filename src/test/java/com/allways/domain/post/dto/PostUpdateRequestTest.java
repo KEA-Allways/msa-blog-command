@@ -4,12 +4,12 @@ import com.allways.common.factory.post.PostUpdateRequestFactory;
 
 import org.junit.jupiter.api.Test;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,96 +18,93 @@ public class PostUpdateRequestTest {
     private final Validator validator = factory.getValidator();
 
     @Test
-    void PostCreateRequestValidateTest() {
+    void postUpdateRequestValidation() {
         // Given
-        PostUpdateRequest createRequest = PostUpdateRequestFactory.createPostUpdateRequest();
+        PostUpdateRequest updateRequest = PostUpdateRequestFactory
+                .createPostUpdateRequest();
 
         // When
-        Set<String> violations = validator.validate(createRequest).stream()
-                .map(violation -> violation.getPropertyPath() + " " + violation.getMessage())
-                .collect(Collectors.toSet());
+        Set<ConstraintViolation<PostUpdateRequest>> violations =
+                validator.validate(updateRequest);
 
         // Then
-        assertEquals(0, violations.size(), "이 내용은 validation 검사를 통과 해야 합니다.");
+        assertEquals(0, violations.size(), 
+                "위반 사항이 없습니다.");
     }
 
     @Test
-    void PostTitleBlankTest() {
+    void postUpdatePostTitleValidation() {
         // Given
-        PostUpdateRequest createRequest = PostUpdateRequestFactory.createPostUpdateRequest(
-                "",
-                "postContent",
-                1L,
-                "postImgUrl"
-        );
+        PostUpdateRequest updateRequest = PostUpdateRequestFactory
+                .createPostUpdateRequest(
+                        "",
+                        "postContent",
+                        1L,
+                        "postImgUrl");
 
         // When
-        Set<String> violations = validator.validate(createRequest).stream()
-                .map(violation -> violation.getPropertyPath() + " " + violation.getMessage())
-                .collect(Collectors.toSet());
+        Set<ConstraintViolation<PostUpdateRequest>> violations =
+                validator.validate(updateRequest);
 
         // Then
-        assertFalse(violations.isEmpty(), "위반 사항이 존재합니다.");
-        assertEquals(1, violations.size(), "PostTitle은 Blank가 아니어야합니다.");
+        assertEquals(1, violations.size(),
+                "PostTitle이 Blank 입니다.");
     }
 
     @Test
-    void PostContentBlankTest() {
+    void postUpdatePostContentValidation() {
         // Given
-        PostUpdateRequest createRequest = PostUpdateRequestFactory.createPostUpdateRequest(
-                "postTitle",
-                "",
-                1L,
-                "postImgUrl"
-        );
+        PostUpdateRequest updateRequest = PostUpdateRequestFactory
+                .createPostUpdateRequest(
+                        "postTitle",
+                        "",
+                        1L,
+                        "postImgUrl");
 
         // When
-        Set<String> violations = validator.validate(createRequest).stream()
-                .map(violation -> violation.getPropertyPath() + " " + violation.getMessage())
-                .collect(Collectors.toSet());
+        Set<ConstraintViolation<PostUpdateRequest>> violations =
+                validator.validate(updateRequest);
 
         // Then
-        assertFalse(violations.isEmpty(), "위반 사항이 존재합니다.");
-        assertEquals(1, violations.size(), "PostContent는 Blank가 아니어야합니다.");
+        assertEquals(1, violations.size(),
+                "PostContent가 Blank 입니다.");
     }
 
     @Test
-    void NegativeCategorySeqTest() {
+    void postUpdateCategorySeqValidation() {
         // Given
-        PostUpdateRequest createRequest = PostUpdateRequestFactory.createPostUpdateRequest(
-                "postTitle",
-                "postContent",
-                -1L,
-                "postImgUrl"
-        );
+        PostUpdateRequest updateRequest = PostUpdateRequestFactory
+                .createPostUpdateRequest(
+                        "postTitle",
+                        "postContent",
+                        -1L,
+                        "postImgUrl");
 
         // When
-        Set<String> violations = validator.validate(createRequest).stream()
-                .map(violation -> violation.getPropertyPath() + " " + violation.getMessage())
-                .collect(Collectors.toSet());
+        Set<ConstraintViolation<PostUpdateRequest>> violations =
+                validator.validate(updateRequest);
 
         // Then
-        assertFalse(violations.isEmpty(), "위반 사항이 존재합니다.");
-        assertEquals(1, violations.size(), "CategorySeq는 음수가 아니어야합니다.");
+        assertEquals(1, violations.size(),
+                "CategorySeq가 음수가 입니다.");
     }
 
     @Test
-    void PostImgUrlBlankTest() {
+    void postUpdatePostImgUrlValidation() {
         // Given
-        PostUpdateRequest createRequest = PostUpdateRequestFactory.createPostUpdateRequest(
-                "postTitle",
-                "postContent",
-                1L,
-                ""
-        );
+        PostUpdateRequest updateRequest = PostUpdateRequestFactory
+                .createPostUpdateRequest(
+                        "postTitle",
+                        "postContent",
+                        1L,
+                        "");
 
         // When
-        Set<String> violations = validator.validate(createRequest).stream()
-                .map(violation -> violation.getPropertyPath() + " " + violation.getMessage())
-                .collect(Collectors.toSet());
+        Set<ConstraintViolation<PostUpdateRequest>> violations =
+                validator.validate(updateRequest);
 
         // Then
-        assertFalse(violations.isEmpty(), "위반 사항이 존재합니다.");
-        assertEquals(1, violations.size(), "PostImgUrl은 Blank가 아니어야합니다.");
+        assertEquals(1, violations.size(),
+                "PostImgUrl이 Blank 입니다.");
     }
 }

@@ -26,9 +26,11 @@ public class CategoryCommandService {
 
     @Transactional
     public void updateCategory(CategoryUpdateRequest req, Long categorySeq){
-        categoryRepository.updateCategoryByCategorySeq(
+        categoryRepository.updateByCategorySeq(
                 categorySeq,
-                req.getCategoryName()
+                req.getCategoryName(),
+                req.getCategoryOrder(),
+                req.getThemeSeq()
         );
     }
 
