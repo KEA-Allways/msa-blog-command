@@ -49,3 +49,7 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: ${eureka_uri:http://localhost:8761/eureka}
+
+env :
+  category-feign-url :  "http://localhost:8086/api/category/feign"
+  theme-feign-url :  "http://localhost:8086/api/theme/feign"
