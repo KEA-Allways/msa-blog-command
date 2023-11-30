@@ -4,12 +4,12 @@ import com.allways.common.factory.category.CategoryCreateRequestFactory;
 
 import org.junit.jupiter.api.Test;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,32 +18,32 @@ public class CategoryCreateRequestTest {
     private final Validator validator = factory.getValidator();
 
     @Test
-    void CategoryCreateRequestValidateTest() {
+    void categoryCreateRequestValidation() {
         // Given
-        CategoryCreateRequest categoryCreateRequest = CategoryCreateRequestFactory.createCategoryCreateRequest();
+        CategoryCreateRequest createRequest = CategoryCreateRequestFactory
+                .createCategoryCreateRequest();
 
         // When
-        Set<String> violations = validator.validate(categoryCreateRequest).stream()
-                .map(violation -> violation.getPropertyPath() + " " + violation.getMessage())
-                .collect(Collectors.toSet());
+        Set<ConstraintViolation<CategoryCreateRequest>> violations =
+                validator.validate(createRequest);
 
         // Then
         assertEquals(0, violations.size(),
-                "이 내용은 validation 검사를 통과 해야 합니다.");
+                "위반 사항이 없습니다.");
     }
 
     @Test
-    void CategoryNameBlankTest() {
+    void categoryCreateCategoryNameValidation() {
         // Given
-        CategoryCreateRequest categoryCreateRequest = CategoryCreateRequestFactory.createCategoryCreateRequest("");
+        CategoryCreateRequest createRequest = CategoryCreateRequestFactory
+                .createCategoryCreateRequest("");
 
         // When
-        Set<String> violations = validator.validate(categoryCreateRequest).stream()
-                .map(violation -> violation.getPropertyPath() + " " + violation.getMessage())
-                .collect(Collectors.toSet());
+        Set<ConstraintViolation<CategoryCreateRequest>> violations =
+                validator.validate(createRequest);
 
         // Then
         assertEquals(1, violations.size(),
-                "이 내용은 validation 검사를 통과 하지 못 합니다.");
+                "카테고리 이름을 입력해주세요.");
     }
 }

@@ -9,7 +9,6 @@ import com.allways.domain.post.repository.PostRepository;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
@@ -17,12 +16,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.Mockito.*;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 public class PostCommandServiceTest {
-
     @Mock private PostRepository postRepository;
     @InjectMocks private PostCommandService postCommandService;
     @Captor private ArgumentCaptor<Post> postArgumentCaptor;
@@ -31,14 +28,15 @@ public class PostCommandServiceTest {
     void createPostTest() {
         // Given
         Long userSeq = 1L;
-        PostCreateRequest createRequest = PostCreateRequestFactory.createPostCreateRequest();
+        PostCreateRequest createRequest = PostCreateRequestFactory
+                .createPostCreateRequest();
 
         // When
+        // 원래 쓰던 createPost는 feign을 쓰는 부분이 있어서 따로 테스트 용 코드 만들어줬음
         postCommandService.createPostForTest(createRequest, userSeq);
 
         // Then
-        verify(postRepository, times(1))
-                .save(postArgumentCaptor.capture());
+        verify(postRepository).save(postArgumentCaptor.capture());
 
         Post savedPost = postArgumentCaptor.getValue();
 
@@ -51,7 +49,8 @@ public class PostCommandServiceTest {
     void updatePostTest() {
         // Given
         Long postSeq = 1L;
-        PostUpdateRequest updateRequest = PostUpdateRequestFactory.createPostUpdateRequest();
+        PostUpdateRequest updateRequest = PostUpdateRequestFactory
+                .createPostUpdateRequest();
 
         // When
         postCommandService.updatePost(updateRequest, postSeq);

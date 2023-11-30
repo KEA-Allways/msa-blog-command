@@ -8,14 +8,12 @@ import com.allways.domain.category.repository.CategoryRepository;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,22 +25,23 @@ class CategoryCommandServiceTest {
     @Captor private ArgumentCaptor<Category> categoryArgumentCaptor;
 
     @Test
-    void CreateCategoryTest() {
+    void createCategoryTest() {
         // Given
         Long themeSeq = 1L;
-        CategoryCreateRequest createRequest = CategoryCreateRequestFactory.createCategoryCreateRequest();
         Long nextOrder = 10L;
-
-        when(categoryFeignService.readCategoryOrder(anyLong())).thenReturn(nextOrder);
+        CategoryCreateRequest createRequest = CategoryCreateRequestFactory
+                .createCategoryCreateRequest();
 
         // When
+        when(categoryFeignService.readCategoryOrder(themeSeq)).thenReturn(nextOrder);
+
         categoryCommandService.createCategory(themeSeq, createRequest);
 
         // Then
-        verify(categoryFeignService, times(1)).readCategoryOrder(themeSeq);
-        categoryArgumentCaptor = ArgumentCaptor.forClass(Category.class);
-        verify(categoryRepository, times(1)).save(categoryArgumentCaptor.capture());
+        verify(categoryFeignService).readCategoryOrder(themeSeq);
 
+        categoryArgumentCaptor = ArgumentCaptor.forClass(Category.class);
+        verify(categoryRepository).save(categoryArgumentCaptor.capture());
         Category savedCategory = categoryArgumentCaptor.getValue();
 
         assertEquals(createRequest.getCategoryName(), savedCategory.getCategoryName());
@@ -51,7 +50,7 @@ class CategoryCommandServiceTest {
     }
 
     @Test
-    void testDeleteCategory() {
+    void deleteCategoryTest() {
         // Given
         Long categorySeq = 1L;
 
@@ -59,6 +58,6 @@ class CategoryCommandServiceTest {
         categoryCommandService.deleteCategory(categorySeq);
 
         // Then
-        verify(categoryRepository, times(1)).deleteById(categorySeq);
+        verify(categoryRepository).deleteById(categorySeq);
     }
 }
