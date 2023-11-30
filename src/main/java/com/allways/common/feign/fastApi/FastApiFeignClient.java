@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
 @FeignClient(name = "fastApi", url = "http://localhost:8000")
 public interface FastApiFeignClient {
-    @PostMapping(value = "/receive_theme" )
+    @PostMapping(value = "/api/feign/theme" )
     @ResponseStatus(HttpStatus.CREATED)
-    void sendDataToFastApiTheme(@RequestBody FastApiThemeDataRequest request);
+    void saveThemeToFastApi(@RequestBody FastApiThemeDataRequest request);
 
-    @PostMapping(value = "/receive_thumbnail")
+    @PostMapping(value = "/api/feign/thumbnail")
     @ResponseStatus(HttpStatus.CREATED)
-    void sendDateToFastApiThumbnail(@RequestBody FastApiThumbnailDataRequest request);
+    void saveThumbnailToFastApi(@RequestBody FastApiThumbnailDataRequest request);
 }
