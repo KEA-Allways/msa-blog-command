@@ -32,7 +32,7 @@ public class PostCommandController {
     @ResponseStatus(HttpStatus.OK)
     public Response updatePost(@PathVariable Long postSeq,
                                @RequestBody PostUpdateRequest req){
-        postCommandService.updatePost(req, postSeq);
+        postService.updatePost(req, postSeq);
         return Response.success(postSeq);
     }
 
