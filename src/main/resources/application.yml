@@ -1,4 +1,6 @@
 spring:
+  main:
+    allow-bean-definition-overriding: true
   application:
     name: blog-command-service
   datasource:
@@ -14,6 +16,7 @@ spring:
       properties:
         hibernate:
           format_sql: true
+
 
   # 로깅 설정
   logging:

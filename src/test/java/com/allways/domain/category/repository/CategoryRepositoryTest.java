@@ -2,34 +2,37 @@ package com.allways.domain.category.repository;
 
 import com.allways.common.factory.category.CategoryFactory;
 import com.allways.domain.category.entity.Category;
+import com.allways.domain.category.repository.CategoryRepository;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
+import javax.persistence.PersistenceContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) // 실제 데이터베이스 사용
-@SpringBootTest
-@ActiveProfiles("test")
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@DataJpaTest
 class CategoryRepositoryTest {
-    @Autowired private CategoryRepository categoryRepository;
-    @Autowired private EntityManager entityManager;
+    @Autowired
+    CategoryRepository categoryRepository;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Test
-    @Transactional
     void updateByCategorySeqTest() {
         // Given
         String newCategoryName = "updateCategoryName";
         Long newCategoryOrder = 2L;
         Long newThemeSeq = 2L;
 
-        Category category = CategoryFactory.createCategory();
+        Category category = CategoryFactory.createCategory(
+                "originalCategoryName",
+                12345L,
+                12345L);
         entityManager.persist(category);
 
         // When
