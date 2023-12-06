@@ -26,13 +26,13 @@ spring:
   # 서버 설정
 server:
   port: 8085
-
+  host: ${app.server.host:localhost}
 
 eureka:
   instance:
 #    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
     instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
-    hostname: 54.226.161.141 #
+    hostname: ${server.host} #
   client:
     register-with-eureka: true
     fetch-registry: true
